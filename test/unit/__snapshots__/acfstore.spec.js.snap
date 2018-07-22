@@ -1,0 +1,46 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`acfstore ACFStore addFieldSubField 1`] = `
+Array [
+  Object {
+    "fields": Array [
+      Object {
+        "connectorName": "getAppleInformationImages",
+        "fieldName": "images",
+        "fullName": "images",
+        "subFields": Array [
+          Object {
+            "subFieldName": "image",
+            "subFieldType": "image",
+          },
+        ],
+        "type": "repeater",
+      },
+    ],
+    "fullCaseName": "AppleInformation",
+    "fullName": "Apple Information",
+    "resolverFieldGroup": false,
+  },
+]
+`;
+
+exports[`acfstore utility functions concatenateArrayInObjectInArray 1`] = `
+Array [
+  Object {
+    "foo": "bar",
+  },
+  Object {
+    "fields": Array [
+      Object {
+        "connectorName": "getAppleInformationPrice",
+        "fullName": "price",
+      },
+      Object {
+        "connectorName": "getAppleInformationCultivar",
+        "fullName": "cultivar",
+      },
+    ],
+    "fullName": "Apple Information",
+  },
+]
+`;

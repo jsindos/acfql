@@ -1,0 +1,31 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`generate resolvers file generateResolversTemplate 1`] = `
+"function Resolvers (Connectors) {
+  const Resolvers = {
+    Query: {
+      
+      post (_, { name, id, postType }) {
+        return Connectors.getPost({ name, id, postType })
+      },
+      posts (_, { category, postType }) {
+        return Connectors.getPosts({ category, postType })
+      }
+    },
+
+    Post: {
+      customFields (post) {
+        return Connectors.getCustomFields({ postId: post.id })
+      }
+    },
+    
+    
+    
+  }
+
+  return Resolvers
+}
+
+module.exports = Resolvers
+"
+`;

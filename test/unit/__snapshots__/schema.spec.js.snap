@@ -1,0 +1,64 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`generate schema files generateCustomPostTypeTemplate 1`] = `
+"const AppleInformation = require('./AppleInformation')
+const OtherInformation = require('./OtherInformation')
+
+
+const Apple = \`
+type Apple {
+  id: Int
+  post_title: String
+  
+  appleInformation: AppleInformation,
+  otherInformation: OtherInformation
+}
+\`
+
+module.exports = () => [ Apple, AppleInformation, OtherInformation ]
+"
+`;
+
+exports[`generate schema files generateFieldGroupTemplate 1`] = `
+"const AppleInformation = \`
+
+type AppleInformation {
+  
+  cultivar: JSON
+  price: JSON
+}
+\`
+
+module.exports = () => [ AppleInformation ]
+
+"
+`;
+
+exports[`generate schema files generateSchemaTemplate 1`] = `
+"
+const Post = require('./Post')
+
+const RootQuery = \`
+  scalar JSON
+
+  type Query {
+    
+    post(name: String, id: Int, postType: String): Post
+    posts(category: String, postType: String): [Post]
+  }
+\`
+
+const SchemaDefinition = \`
+  schema {
+    query: Query
+  }
+\`
+
+module.exports = [
+  
+  Post,
+  RootQuery,
+  SchemaDefinition
+]
+"
+`;

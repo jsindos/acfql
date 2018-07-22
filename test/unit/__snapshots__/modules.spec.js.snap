@@ -1,0 +1,39 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`generate module files generateFieldTemplate 1`] = `
+"const getField = require('./utility/getField')
+
+module.exports = (Post, Postmeta) => {
+  return function ({ postId }) {
+    return Postmeta.findOne({
+      where: {
+        meta_key: 'cultivar',
+        post_id: postId
+      }
+    }).then(postMeta => postMeta && postMeta.meta_value)
+  }
+}
+"
+`;
+
+exports[`generate module files generateIndexTemplate 1`] = `
+"// AppleInformation fields
+const getAppleInformationCultivar = require('./getAppleInformationCultivar')
+const getAppleInformationPrice = require('./getAppleInformationPrice')
+
+// OtherInformation fields
+const getOtherInformationOther = require('./getOtherInformationOther')
+
+
+function Connectors ({ Post, Postmeta }) {
+  return {
+    
+    getAppleInformationCultivar: getAppleInformationCultivar(Post, Postmeta),
+    getAppleInformationPrice: getAppleInformationPrice(Post, Postmeta),
+    getOtherInformationOther: getOtherInformationOther(Post, Postmeta)
+  }
+}
+
+module.exports = Connectors
+"
+`;

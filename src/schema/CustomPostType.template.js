@@ -1,9 +1,10 @@
+/* eslint-disable indent */
+
 const generateTemplates = (customPostTypes, fieldGroups) => {
   return customPostTypes.map(customPostType => {
     return {
       fileName: customPostType.fullCaseName,
       template: `${customPostType.fieldGroups.map(g =>
-      // eslint-disable-next-line indent
 `const ${g.charAt(0).toUpperCase() + g.slice(1)} = require('./${g.charAt(0).toUpperCase() + g.slice(1)}')
 `
       ).join('')}
@@ -13,7 +14,6 @@ type ${customPostType.fullCaseName} {
   id: Int
   post_title: String
   ${customPostType.fieldGroups.map(g =>
-    // eslint-disable-next-line indent
   `
   ${g}: ${g.charAt(0).toUpperCase() + g.slice(1)}`
   )}

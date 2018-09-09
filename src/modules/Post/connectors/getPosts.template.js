@@ -1,9 +1,9 @@
 module.exports.generateTemplate = () =>
-`const Sequelize = require('sequelize')
+  `const Sequelize = require('sequelize')
 const Op = Sequelize.Op
 
-module.exports = function (Post, Terms, TermRelationships) {
-  return function({ postType, category, order, limit = 10, skip = 0, userId }) {
+module.exports = function (Post, Terms, TermRelationships, TermTaxonomy) {
+  return function({ postType, category, order, limit = 10, skip = 0, userId, language }) {
     const orderBy = order ? [order.orderBy, order.direction] : ['menu_order', 'ASC']
     const where = {
       post_status: 'publish',
@@ -47,6 +47,30 @@ module.exports = function (Post, Terms, TermRelationships) {
             )
         }, Promise.resolve())
         .then(() => categoryPosts)
+      })
+    }
+
+    if (language) {
+      return Post.findAll({
+        where: where
+      }).then(posts => {
+        let languagePosts = []
+        return posts.reduce((promise, post) => {
+          return promise
+            .then(result => {
+              return TermTaxonomy.findOne({
+                where: {
+                  description: {
+                    [Op.like]: \`%"$\{language}";i:$\{post.id}%\`
+                  },
+                  taxonomy: 'post_translations'
+                }
+              })
+            }).then(result =>
+              result &&
+              languagePosts.push(post))
+        }, Promise.resolve())
+          .then(() => languagePosts)
       })
     }
 

@@ -1,14 +1,18 @@
 /* global expect, describe, it, beforeEach */
 const SequelizeMock = require('sequelize-mock')
+const Sequelize = require('sequelize')
+const Op = Sequelize.Op
 
 const getAppleInformationLocation = require('../../graphql/modules/CustomFields/connectors/getAppleInformationLocation')
+const getPosts = require('../../graphql/modules/Post/connectors/getPosts')
+
 const samplePostmetaData = require('./sampleData/Postmeta')
 const samplePostData = require('./sampleData/Post')
 const sampleTermTaxonomyData = require('./sampleData/TermTaxonomy')
 
 /**
  * Map query handlers for a mock to a sampleData
- * @param {*} mock -
+ * @param {*} mock
  * @param {*} sampleData - JSON representation of SQL data from Sequel Pro
  */
 const applyHandlers = (mock, sampleData) =>
@@ -20,10 +24,30 @@ const applyHandlers = (mock, sampleData) =>
     }
     if (query === 'findAll') {
       return sampleData.data.filter(s =>
-        Object.entries(queryOptions[0].where).map(([ key, value ]) => s[key] === value).every(v => v)
+        Object.entries(queryOptions[0].where).map(([ key, value ]) => applyWhereOperation(s[key], value)).every(v => v)
       )
     }
   })
+
+/**
+ * Apply a where operation found inside of a query
+ * @param {*} fieldValue - The value of the field on which the where clause is being applied
+ * @param {*} where - The value of the where clause
+ * Post.findAll({
+ *   where: {
+ *     post_status: 'publish', // post_status is `fieldValue`, 'publish' is `where`
+ *     post_type: {
+ *       [Op.in]: [ 'wp_apple' ]
+ *     }
+ *   }
+ * })
+ */
+const applyWhereOperation = (fieldValue, where) => {
+  if (where[Op.in]) {
+    return where[Op.in].includes(fieldValue)
+  }
+  return fieldValue === where
+}
 
 describe('internationalisation', () => {
   let PostMock, PostmetaMock, TermTaxonomyMock
@@ -71,11 +95,24 @@ describe('internationalisation', () => {
     //     ID: 1
     //   }
     // }).then(posts => console.log(posts.map(p => p.ID)))
-    const value = await getAppleInformationLocation(PostMock, PostmetaMock)({ postId: 8 })
-    expect(value).toEqual('Queensland')
+    const appleInformationLocation = await getAppleInformationLocation(PostMock, PostmetaMock)({ postId: 8 })
+    expect(appleInformationLocation).toEqual('Queensland')
   })
 
   it('retrieves post according to translation argument', async () => {
-
+    let apples
+    apples = await getPosts(PostMock, null, null, TermTaxonomyMock)({ postType: 'wp_apple', language: 'en' })
+    expect(apples).toHaveLength(2)
+    expect(apples).toContainEqual(
+      expect.objectContaining({ post_title: 'Granny Smith' })
+    )
+    expect(apples).toContainEqual(
+      expect.objectContaining({ post_title: 'Pink Lady' })
+    )
+    apples = await getPosts(PostMock, null, null, TermTaxonomyMock)({ postType: 'wp_apple', language: 'da' })
+    expect(apples).toHaveLength(1)
+    expect(apples).toContainEqual(
+      expect.objectContaining({ post_title: 'Lyserød Dame' })
+    )
   })
 })

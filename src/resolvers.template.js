@@ -1,3 +1,5 @@
+/* eslint-disable indent */
+
 module.exports.generateTemplate = (customPostTypes, fieldGroups) =>
 `function Resolvers (Connectors) {
   const Resolvers = {

@@ -4,9 +4,29 @@ const SequelizeMock = require('sequelize-mock')
 const getAppleInformationLocation = require('../../graphql/modules/CustomFields/connectors/getAppleInformationLocation')
 const samplePostmetaData = require('./sampleData/Postmeta')
 const samplePostData = require('./sampleData/Post')
+const sampleTermTaxonomyData = require('./sampleData/TermTaxonomy')
 
-describe('acfRepeaterField', () => {
-  let PostMock, PostmetaMock
+/**
+ * Map query handlers for a mock to a sampleData
+ * @param {*} mock -
+ * @param {*} sampleData - JSON representation of SQL data from Sequel Pro
+ */
+const applyHandlers = (mock, sampleData) =>
+  mock.$queryInterface.$useHandler((query, queryOptions, done) => {
+    if (query === 'findOne') {
+      return sampleData.data.find(s =>
+        Object.entries(queryOptions[0].where).map(([ key, value ]) => s[key] === value).every(v => v)
+      )
+    }
+    if (query === 'findAll') {
+      return sampleData.data.filter(s =>
+        Object.entries(queryOptions[0].where).map(([ key, value ]) => s[key] === value).every(v => v)
+      )
+    }
+  })
+
+describe('internationalisation', () => {
+  let PostMock, PostmetaMock, TermTaxonomyMock
   beforeEach(async () => {
     const DBConnectionMock = new SequelizeMock()
     /**
@@ -23,6 +43,11 @@ describe('acfRepeaterField', () => {
       timestamps: false,
       hasPrimaryKeys: false
     })
+    TermTaxonomyMock = DBConnectionMock.define('term_taxonomy', {}, {
+      autoQueryFallback: false,
+      timestamps: false,
+      hasPrimaryKeys: false
+    })
     /**
      * https://github.com/BlinkUX/sequelize-mock/issues/43
      * https://sequelize-mock.readthedocs.io/en/latest/docs/mock-queries/
@@ -33,20 +58,24 @@ describe('acfRepeaterField', () => {
      * 4. If not available and being called on a Model, it will return an automatically generated result based on the defaults of the Model being queried, unless configured otherwise
      * 5. Any fallback function defined in the configuration for the object
      */
-    PostmetaMock.$queryInterface.$useHandler(function (query, queryOptions, done) {
-      if (query === 'findOne') {
-        return samplePostmetaData.data.find(s =>
-          Object.entries(queryOptions[0].where).map(([ key, value ]) => s[key] === value).every(v => v)
-        )
-      }
-    })
-    PostMock.$queueResult(samplePostData.data.map(s => PostMock.build(s)))
-    PostmetaMock.$queueResult(samplePostmetaData.data.map(s => PostmetaMock.build(s)))
+    applyHandlers(PostmetaMock, samplePostmetaData)
+    applyHandlers(PostMock, samplePostData)
+    applyHandlers(TermTaxonomyMock, sampleTermTaxonomyData)
+    // PostMock.$queueResult(samplePostData.data.map(s => PostMock.build(s)))
+    // PostmetaMock.$queueResult(samplePostmetaData.data.map(s => PostmetaMock.build(s)))
   })
 
-  it('retrieves all repeater subfields', async () => {
-    // PostMock.findAll().then(posts => console.log(posts.map(p => p.ID)))
+  it('retrieves information according to a generated resolver', async () => {
+    // PostMock.findAll({
+    //   where: {
+    //     ID: 1
+    //   }
+    // }).then(posts => console.log(posts.map(p => p.ID)))
     const value = await getAppleInformationLocation(PostMock, PostmetaMock)({ postId: 8 })
     expect(value).toEqual('Queensland')
+  })
+
+  it('retrieves post according to translation argument', async () => {
+
   })
 })

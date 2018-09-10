@@ -19,13 +19,13 @@ const applyHandlers = (mock, sampleData) =>
   mock.$queryInterface.$useHandler((query, queryOptions, done) => {
     if (query === 'findOne') {
       return sampleData.data.find(s =>
-        Object.entries(queryOptions[0].where).map(([ key, value ]) => s[key] === value).every(v => v)
-      )
+        Object.entries(queryOptions[0].where).map(([ key, value ]) => applyWhereOperation(s[key], value)).every(v => v)
+      ) || null
     }
     if (query === 'findAll') {
       return sampleData.data.filter(s =>
         Object.entries(queryOptions[0].where).map(([ key, value ]) => applyWhereOperation(s[key], value)).every(v => v)
-      )
+      ) || null
     }
   })
 
@@ -45,6 +45,10 @@ const applyHandlers = (mock, sampleData) =>
 const applyWhereOperation = (fieldValue, where) => {
   if (where[Op.in]) {
     return where[Op.in].includes(fieldValue)
+  }
+  if (where[Op.like]) {
+    // Replace one `%` on either side of Op.like with empty string
+    return fieldValue.includes(where[Op.like].replace(/^%|%+$/gm, ''))
   }
   return fieldValue === where
 }

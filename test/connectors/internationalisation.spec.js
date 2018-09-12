@@ -55,6 +55,7 @@ const applyWhereOperation = (fieldValue, where) => {
 
 describe('internationalisation', () => {
   let PostMock, PostmetaMock, TermTaxonomyMock
+  const i18nEnabledSettings = { private: { languageEnabled: true } }
   beforeEach(async () => {
     const DBConnectionMock = new SequelizeMock()
     /**
@@ -105,7 +106,7 @@ describe('internationalisation', () => {
 
   it('retrieves post according to translation argument', async () => {
     let apples
-    apples = await getPosts(PostMock, null, null, TermTaxonomyMock)({ postType: 'wp_apple', language: 'en' })
+    apples = await getPosts(PostMock, null, null, TermTaxonomyMock, i18nEnabledSettings)({ postType: 'wp_apple', language: 'en' })
     expect(apples).toHaveLength(2)
     expect(apples).toContainEqual(
       expect.objectContaining({ post_title: 'Granny Smith' })
@@ -113,7 +114,7 @@ describe('internationalisation', () => {
     expect(apples).toContainEqual(
       expect.objectContaining({ post_title: 'Pink Lady' })
     )
-    apples = await getPosts(PostMock, null, null, TermTaxonomyMock)({ postType: 'wp_apple', language: 'da' })
+    apples = await getPosts(PostMock, null, null, TermTaxonomyMock, i18nEnabledSettings)({ postType: 'wp_apple', language: 'da' })
     expect(apples).toHaveLength(1)
     expect(apples).toContainEqual(
       expect.objectContaining({ post_title: 'Lyserød Dame' })
@@ -122,7 +123,7 @@ describe('internationalisation', () => {
 
   it('retrieves `en` as the default language', async () => {
     let apples
-    apples = await getPosts(PostMock, null, null, TermTaxonomyMock, { private: { languageEnabled: true } })({ postType: 'wp_apple' })
+    apples = await getPosts(PostMock, null, null, TermTaxonomyMock, i18nEnabledSettings)({ postType: 'wp_apple' })
     expect(apples).toHaveLength(2)
     expect(apples).toContainEqual(
       expect.objectContaining({ post_title: 'Granny Smith' })

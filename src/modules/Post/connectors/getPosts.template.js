@@ -50,7 +50,7 @@ module.exports = function (Post, Terms, TermRelationships, TermTaxonomy, setting
       })
     }
 
-    if (settings.private.languageEnabled) {
+    if (settings && settings.private.languageEnabled) {
       return Post.findAll({
         where: where
       }).then(posts => {

@@ -55,7 +55,7 @@ const applyWhereOperation = (fieldValue, where) => {
 
 describe('internationalisation', () => {
   let PostMock, PostmetaMock, TermTaxonomyMock
-  const i18nEnabledSettings = { private: { languageEnabled: true } }
+  const i18nEnabledSettings = { privateSettings: { languageEnabled: true } }
   beforeEach(async () => {
     const DBConnectionMock = new SequelizeMock()
     /**

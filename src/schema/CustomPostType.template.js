@@ -11,7 +11,7 @@ const generateTemplates = (customPostTypes, fieldGroups) => {
 
 const ${customPostType.fullCaseName} = \`
 type ${customPostType.fullCaseName} {
-  id: Int
+  ID: Int
   post_title: String
   ${customPostType.fieldGroups.map(g =>
   `

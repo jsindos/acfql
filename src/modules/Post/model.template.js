@@ -1,9 +1,11 @@
+/* eslint-disable indent */
+
 module.exports.generateTemplate = () =>
 `const Sequelize = require('sequelize')
 
 module.exports = function (Conn, prefix) {
   return Conn.define(prefix + 'posts', {
-    id: { type: Sequelize.INTEGER, primaryKey: true },
+    ID: { type: Sequelize.INTEGER, primaryKey: true },
     post_author: { type: Sequelize.INTEGER },
     post_title: { type: Sequelize.STRING },
     post_content: { type: Sequelize.STRING },

@@ -24,7 +24,7 @@ module.exports.generateTemplate = (customPostTypes, fieldGroups) =>
 
     Post: {
       customFields (post) {
-        return Connectors.getCustomFields({ postId: post.id })
+        return Connectors.getCustomFields({ postId: post.ID })
       }
     },
     
@@ -47,7 +47,7 @@ module.exports.generateTemplate = (customPostTypes, fieldGroups) =>
       ${g.fields.map(f =>
       `
       ${f.fullName} (post) {
-        return Connectors.${f.connectorName}({ postId: post.id })
+        return Connectors.${f.connectorName}({ postId: post.ID })
       },
       `
       ).join('')}

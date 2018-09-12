@@ -15,7 +15,7 @@ exports[`generate resolvers file generateResolversTemplate 1`] = `
 
     Post: {
       customFields (post) {
-        return Connectors.getCustomFields({ postId: post.id })
+        return Connectors.getCustomFields({ postId: post.ID })
       }
     },
     

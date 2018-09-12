@@ -7,7 +7,7 @@ const OtherInformation = require('./OtherInformation')
 
 const Apple = \`
 type Apple {
-  id: Int
+  ID: Int
   post_title: String
   
   appleInformation: AppleInformation,

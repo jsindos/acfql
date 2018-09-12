@@ -6,10 +6,10 @@ const getCustomFields = require('./getCustomFields')
 // import getTermPosts from './getTermPosts'
 // import getPostLayout from './getPostLayout'
 
-module.exports = function ({ Post, Postmeta, Terms, TermRelationships }, settings) {
+module.exports = function ({ Post, Postmeta, Terms, TermRelationships, TermTaxonomy }, settings) {
   return {
     getPost: getPost(Post),
-    getPosts: getPosts(Post, Terms, TermRelationships, settings),
+    getPosts: getPosts(Post, Terms, TermRelationships, TermTaxonomy, settings),
     getCustomFields: getCustomFields(Post, Postmeta),
     // getPostTerms: getPostTerms(Terms, TermRelationships, settings),
     // getTermPosts: getTermPosts(TermRelationships, Post, settings),

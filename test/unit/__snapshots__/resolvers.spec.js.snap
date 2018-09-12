@@ -8,8 +8,8 @@ exports[`generate resolvers file generateResolversTemplate 1`] = `
       post (_, { name, id, postType }) {
         return Connectors.getPost({ name, id, postType })
       },
-      posts (_, { category, postType }) {
-        return Connectors.getPosts({ category, postType })
+      posts (_, { category, postType, language }) {
+        return Connectors.getPosts({ category, postType, language })
       }
     },
 

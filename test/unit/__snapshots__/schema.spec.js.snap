@@ -44,7 +44,7 @@ const RootQuery = \`
   type Query {
     
     post(name: String, id: Int, postType: String): Post
-    posts(category: String, postType: String): [Post]
+    posts(category: String, postType: String, language: String): [Post]
   }
 \`
 

@@ -1,3 +1,5 @@
+/* eslint-disable indent */
+
 function generateTemplate (customPostTypes, fieldGroups) {
   return `${customPostTypes.map(c =>
 `const ${c.fullCaseName} = require('./${c.fullCaseName}')
@@ -10,12 +12,12 @@ const RootQuery = \`
 
   type Query {
     ${customPostTypes.map(c =>
-    `${c.pluralizedName}: [${c.fullCaseName}]
+    `${c.pluralizedName}(language: String): [${c.fullCaseName}]
     ${c.camelizedName}(name: String, id: Int): ${c.fullCaseName}
     `
     ).join('')}
     post(name: String, id: Int, postType: String): Post
-    posts(category: String, postType: String): [Post]
+    posts(category: String, postType: String, language: String): [Post]
   }
 \`
 

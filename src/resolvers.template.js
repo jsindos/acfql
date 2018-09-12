@@ -6,8 +6,8 @@ module.exports.generateTemplate = (customPostTypes, fieldGroups) =>
     Query: {
       ${customPostTypes.map(c =>
       `
-      ${c.pluralizedName} () {
-        return Connectors.getPosts({ postType: '${c.fullName}' })
+      ${c.pluralizedName} (_, { language }) {
+        return Connectors.getPosts({ postType: '${c.fullName}', language })
       },
       ${c.camelizedName} (_, { name, id }) {
         return Connectors.getPost({ postType: '${c.fullName}', name, id })
@@ -17,8 +17,8 @@ module.exports.generateTemplate = (customPostTypes, fieldGroups) =>
       post (_, { name, id, postType }) {
         return Connectors.getPost({ name, id, postType })
       },
-      posts (_, { category, postType }) {
-        return Connectors.getPosts({ category, postType })
+      posts (_, { category, postType, language }) {
+        return Connectors.getPosts({ category, postType, language })
       }
     },
 

@@ -3,7 +3,7 @@ function generateTemplate (customPostTypes, fieldGroups) {
 
 const PostModel = require('./modules/Post/model')
 const PostmetaModel = require('./modules/Postmeta/model')
-const { TermModel, TermRelationshipModel } = require('./modules/Term/model')
+const { TermModel, TermRelationshipModel, TermTaxonomyModel } = require('./modules/Term/model')
 
 const PostConnectors = require('./modules/Post/connectors')
 const PostmetaConnectors = require('./modules/Postmeta/connectors')
@@ -53,12 +53,16 @@ class Database {
       Postmeta: PostmetaModel(Conn, prefix),
       Terms: TermModel(Conn, prefix),
       TermRelationships: TermRelationshipModel(Conn, prefix),
+      TermTaxonomy: TermTaxonomyModel(Conn, prefix)
     }
   }
 
   getConnectors () {
     const models = this.getModels()
-    const { Post, Postmeta, Terms, TermRelationships } = models
+    const { Post, Postmeta, Terms, TermRelationships, TermTaxonomy } = models
+
+    Terms.hasMany(TermTaxonomy, { foreignKey: 'term_id' })
+    TermTaxonomy.belongsTo(Terms, { foreignKey: 'term_id' })
 
     Terms.hasMany(TermRelationships,  { foreignKey: 'term_taxonomy_id' })
     TermRelationships.belongsTo(Terms, { foreignKey: 'term_taxonomy_id' })

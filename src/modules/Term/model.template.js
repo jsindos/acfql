@@ -1,3 +1,5 @@
+/* eslint-disable indent */
+
 module.exports.generateTemplate = () =>
 `const Sequelize = require('sequelize')
 
@@ -18,5 +20,16 @@ const TermRelationshipModel = (Conn, prefix) => {
   })
 }
 
-module.exports = { TermModel, TermRelationshipModel }
+const TermTaxonomyModel = (Conn, prefix) => {
+  return Conn.define(prefix + 'term_taxonomy', {
+    term_taxonomy_id: { type: Sequelize.INTEGER, primaryKey: true },
+    term_id: { type: Sequelize.INTEGER },
+    taxonomy: { type: Sequelize.STRING },
+    description: { type: Sequelize.STRING },
+    parent: { type: Sequelize.INTEGER },
+    count: { type: Sequelize.INTEGER }
+  })
+}
+
+module.exports = { TermModel, TermRelationshipModel, TermTaxonomyModel }
 `

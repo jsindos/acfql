@@ -2,7 +2,7 @@ module.exports.generateTemplate = () =>
   `const Sequelize = require('sequelize')
 const Op = Sequelize.Op
 
-module.exports = function (Post, Terms, TermRelationships, TermTaxonomy) {
+module.exports = function (Post, Terms, TermRelationships, TermTaxonomy, settings) {
   return function({ postType, category, order, limit = 10, skip = 0, userId, language }) {
     const orderBy = order ? [order.orderBy, order.direction] : ['menu_order', 'ASC']
     const where = {
@@ -50,7 +50,7 @@ module.exports = function (Post, Terms, TermRelationships, TermTaxonomy) {
       })
     }
 
-    if (language) {
+    if (settings.private.languageEnabled) {
       return Post.findAll({
         where: where
       }).then(posts => {
@@ -61,7 +61,7 @@ module.exports = function (Post, Terms, TermRelationships, TermTaxonomy) {
               return TermTaxonomy.findOne({
                 where: {
                   description: {
-                    [Op.like]: \`%"$\{language}";i:$\{post.id}%\`
+                    [Op.like]: \`%"$\{language || 'en'}";i:$\{post.ID}%\`
                   },
                   taxonomy: 'post_translations'
                 }

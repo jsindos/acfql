@@ -119,4 +119,16 @@ describe('internationalisation', () => {
       expect.objectContaining({ post_title: 'Lyserød Dame' })
     )
   })
+
+  it('retrieves `en` as the default language', async () => {
+    let apples
+    apples = await getPosts(PostMock, null, null, TermTaxonomyMock, { private: { languageEnabled: true } })({ postType: 'wp_apple' })
+    expect(apples).toHaveLength(2)
+    expect(apples).toContainEqual(
+      expect.objectContaining({ post_title: 'Granny Smith' })
+    )
+    expect(apples).toContainEqual(
+      expect.objectContaining({ post_title: 'Pink Lady' })
+    )
+  })
 })

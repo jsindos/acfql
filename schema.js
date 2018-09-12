@@ -3,11 +3,11 @@ const { Definitions, Database: ACFDatabase, Resolvers: ACFResolvers } = require(
 const { makeExecutableSchema } = require('graphql-tools')
 const GraphQLJSON = require('graphql-type-json')
 
-// returns WordExpressDatabase object that has provides connectors to the database
+// returns ACFDatabase object that has provides connectors to the database
 const Database = new ACFDatabase({ privateSettings, publicSettings })
 const Connectors = Database.connectors
 
-// Reolving functions that use the database connections to resolve GraphQL queries
+// Resolving functions that use the database connections to resolve GraphQL queries
 const Resolvers = ACFResolvers(Connectors, publicSettings)
 
 const executableSchema = makeExecutableSchema({

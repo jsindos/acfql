@@ -10,7 +10,8 @@ const settings = {
       'username': '',
       'password': '',
       'host': '127.0.0.1'
-    }
+    },
+    'languageEnabled': false
   }
 }
 

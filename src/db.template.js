@@ -73,9 +73,9 @@ class Database {
     Postmeta.belongsTo(Post, {foreignKey: 'post_id'})
 
     return {
-      ...PostConnectors(models),
-      ...PostmetaConnectors(models),
-      ...CustomFieldsConnectors(models)
+      ...PostConnectors(models, this.settings),
+      ...PostmetaConnectors(models, this.settings),
+      ...CustomFieldsConnectors(models, this.settings)
     }
   }
 }

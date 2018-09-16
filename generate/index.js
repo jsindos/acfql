@@ -52,7 +52,7 @@ fs.readdirSync(DIR).forEach(file => {
 /**
  * For each schema generation template file,
  * generate the template using the customPostTypes and fieldGroups found in the ACF JSON exports
- * 
+ *
  * Builds to the '/graphql' directory in the root of the project
  */
 Object.entries(templates).forEach(([ templatePath, { generateTemplate } ]) => {
@@ -62,8 +62,7 @@ Object.entries(templates).forEach(([ templatePath, { generateTemplate } ]) => {
       const fileName = path.join(path.dirname(templatePath), `${t.fileName}.js`).replace(/src/, 'graphql')
       writeFile(fileName, t.template, (err) => err && console.log(err))
     })
-  }
-  else {
+  } else {
     const fileName = templatePath.replace(/.template/, '').replace(/src/, 'graphql')
     writeFile(fileName, template, (err) => err && console.log(err))
   }

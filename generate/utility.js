@@ -40,7 +40,7 @@ function updateObjectInArray (array, action) {
   })
 }
 
-function writeFile(path, contents, cb) {
+function writeFile (path, contents, cb) {
   mkdirp(getDirName(path), function (err) {
     if (err) return cb(err)
     fs.writeFile(path, contents, cb)

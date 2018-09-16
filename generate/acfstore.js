@@ -11,16 +11,16 @@ class ACFStore {
   }
 
   /**
-   * 
-   * @param {*} customPostType 
+   *
+   * @param {*} customPostType
    * @param {String} locationParam Is the type of location
    * Can be one of 'post_type' | 'page' | 'post' | 'post_category' etc.
    * If it is 'page' or 'post', then the location is tied to a specific page or post
    * In this case customPostType will be the ID of the page or post
-   * 
+   *
    * Note when customPostType is a 'page' or 'post', we only want to generate the connector for the associated fieldGroups,
    * and not generate anything in the resolvers or the schema
-   * 
+   *
    * We do this by disallowing the customPostType when it is added, using enumerated `this.INBUILT_TYPES`
    * and adding a check to resolvers.template.js and `addFieldGroup` to test for the aforementioned condition
    */
@@ -55,9 +55,9 @@ class ACFStore {
   }
 
   /**
-   * 
+   *
    * @param {*} fieldGroupName
-   * 
+   *
    * If we cannot find an associated customPostType, then the fieldGroup should only render as a connector function
    * and not as a resolver
    * @see addCustomPostType
@@ -90,10 +90,10 @@ class ACFStore {
 
   /**
    * Adds a subfield to a field. Only used by repeater fields.
-   * @param {String} fieldName 
-   * @param {String} fieldGroupName 
+   * @param {String} fieldName
+   * @param {String} fieldGroupName
    * @param {String} subFieldName
-   * 
+   *
    * TODO: If called twice with the same arguments, will double up results. We do not want this behaviour.
    */
   addFieldSubField (fieldName, fieldGroupName, { subFieldName, subFieldType }) {

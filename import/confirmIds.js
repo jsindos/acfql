@@ -4,11 +4,6 @@ const path = require('path')
 const ACFStore = require('../generate/acfstore')
 
 /**
- * stdin to read input from user
- */
-const stdin = process.openStdin()
-
-/**
  * Create the ACFStore that will store the information from our ACF JSON exports
  */
 const store = new ACFStore()
@@ -40,13 +35,7 @@ const confirmIds = async (DIR) => {
       })
     })
   })
-  stdin.addListener('data', captureArgument)
+  // stdin.addListener('data', captureArgument)
 }
 
-/**
- * Captures argument for `confirmIds` function
- */
-const captureArgument = (d) => {
-  console.log('confirmIds')
-  console.log('you entered: [' + d.toString().trim() + ']')
-}
+module.exports = confirmIds

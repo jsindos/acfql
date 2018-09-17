@@ -1,17 +1,19 @@
 /**
- * This script is used to help streamline the acf import process
+ * This script is used to streamline the acf import process
  *
- * Specifically, the script helps to:
- * 1. Delete all pre-existing ACF fields when importing through `wp acf clean`
- * 2. Import all ACF field groups in one run of this script
- * 3. Confirm Ids of pages or posts found in acf-exports
- *     - This is assisted through acfstore.js
+ * Specifically, the script:
+ * 1. Deletes all pre-existing ACF fields using `wp acf clean`
+ * 2. Imports all ACF field groups in one run of the script
+ * 3. Confirms ids of pages or posts found in acf-exports
+ *     - This is assisted through ../generate/acfstore.js
  */
 
 const fs = require('fs')
 const path = require('path')
 
 const captureArgumentWithMessage = require('./utility').captureArgumentWithMessage
+const cleanAcf = require('./cleanAcf')
+const confirmIds = require('./confirmIds')
 
 /**
  * The directory containing our ACF JSON exports
@@ -32,11 +34,11 @@ and imports those found in /acf-exports.\n`)
  * It is run as async as each step must wait for user input
  */
 const main = async () => {
-  const absolutePath = await captureArgumentWithMessage(
+  const absolutePathToProject = await captureArgumentWithMessage(
     `Please enter the absolute path to your WordPress project.\n`
   )
-  // await cleanAcf(absolutePath)
-  // await confirmIds()
+  await cleanAcf(absolutePathToProject)
+  await confirmIds(DIR)
   // await importAcf()
 }
 

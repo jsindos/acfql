@@ -14,6 +14,7 @@ const path = require('path')
 const captureArgumentWithMessage = require('./utility').captureArgumentWithMessage
 const cleanAcf = require('./cleanAcf')
 const confirmIds = require('./confirmIds')
+const importAcf = require('./importAcf')
 
 /**
  * The directory containing the ACF JSON exports
@@ -26,20 +27,21 @@ if (!fs.existsSync(path.join(__dirname, '..', DIR))) {
 }
 
 console.log('Welcome to the import tool.\n')
-console.log(`Please be aware this tool deletes pre-existing ACF fields from your WordPress installation, \
-and imports those found in /acf-exports.\n`)
+console.log(`\x1b[1mPlease be aware this tool deletes pre-existing ACF fields from your WordPress installation, \
+and imports those found in /acf-exports.\x1b[0m\n`)
 
 /**
  * main function
  * It is run as async as each step must wait for user input
  */
 const main = async () => {
-  // const absolutePathToProject = await captureArgumentWithMessage(
-  //   `Please enter the absolute path to your WordPress project.\n`
-  // )
-  // await cleanAcf(absolutePathToProject)
+  const absolutePathToProject = await captureArgumentWithMessage(
+    `\x1b[1m\x1b[41m\x1b[37mPlease enter the absolute path to your WordPress project.\x1b[0m\n`
+  )
+  await cleanAcf(absolutePathToProject)
   await confirmIds(DIR)
-  // await importAcf()
+  await importAcf(absolutePathToProject, DIR)
+  process.exit()
 }
 
 main()

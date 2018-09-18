@@ -16,7 +16,7 @@ const cleanAcf = require('./cleanAcf')
 const confirmIds = require('./confirmIds')
 
 /**
- * The directory containing our ACF JSON exports
+ * The directory containing the ACF JSON exports
  */
 const DIR = './acf-exports'
 
@@ -34,10 +34,10 @@ and imports those found in /acf-exports.\n`)
  * It is run as async as each step must wait for user input
  */
 const main = async () => {
-  const absolutePathToProject = await captureArgumentWithMessage(
-    `Please enter the absolute path to your WordPress project.\n`
-  )
-  await cleanAcf(absolutePathToProject)
+  // const absolutePathToProject = await captureArgumentWithMessage(
+  //   `Please enter the absolute path to your WordPress project.\n`
+  // )
+  // await cleanAcf(absolutePathToProject)
   await confirmIds(DIR)
   // await importAcf()
 }

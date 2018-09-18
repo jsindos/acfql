@@ -26,28 +26,9 @@ if (!fs.existsSync(path.join(__dirname, '..', DIR))) {
 }
 
 /**
- * Parse the ACF JSON exports into our ACFStore
+ * Parse the ACF JSON exports into the ACFStore
  */
-fs.readdirSync(DIR).forEach(file => {
-  const json = JSON.parse(fs.readFileSync(path.join(__dirname, '..', DIR, file), 'utf8'))
-  json.forEach(fieldGroup => {
-    fieldGroup.location.forEach(location => {
-      location.forEach(l => {
-        store.addCustomPostType(l.value, l.param)
-        store.addFieldGroupRelation(l.value, fieldGroup.title, l.param)
-      })
-    })
-    store.addFieldGroup(fieldGroup.title)
-    fieldGroup.fields.forEach(field => {
-      store.addField(field.name, fieldGroup.title, field.type)
-      if (field.type === 'repeater') {
-        field.sub_fields.forEach(subField => {
-          store.addFieldSubField(field.name, fieldGroup.title, { subFieldName: subField.name, subFieldType: subField.type })
-        })
-      }
-    })
-  })
-})
+store.parse(DIR)
 
 /**
  * For each schema generation template file,

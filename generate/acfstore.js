@@ -1,4 +1,6 @@
 const pluralize = require('pluralize')
+const fs = require('fs')
+const path = require('path')
 
 const { concatenateArrayInObjectInArray, updateObjectInArray, camelize } = require('./utility')
 
@@ -110,6 +112,44 @@ class ACFStore {
       update: newFields,
       updateKey: 'fields'
     })
+  }
+
+  /**
+   * Parse the ACF JSON exports into the ACFStore
+   */
+  parse (DIR) {
+    fs.readdirSync(DIR).forEach(file => {
+      this.parseFile(file, DIR)
+    })
+  }
+
+  /**
+   * Parse a single ACF JSON export
+   * @param {*} file
+   * @param {*} DIR
+   * @returns fieldGroups added
+   */
+  parseFile (file, DIR) {
+    const json = JSON.parse(fs.readFileSync(path.join(__dirname, '..', DIR, file), 'utf8'))
+    json.forEach(fieldGroup => {
+      fieldGroup.location.forEach(location => {
+        location.forEach(l => {
+          this.addCustomPostType(l.value, l.param)
+          this.addFieldGroupRelation(l.value, fieldGroup.title, l.param)
+        })
+      })
+      this.addFieldGroup(fieldGroup.title)
+      fieldGroup.fields.forEach(field => {
+        this.addField(field.name, fieldGroup.title, field.type)
+        if (field.type === 'repeater') {
+          field.sub_fields.forEach(subField => {
+            this.addFieldSubField(field.name, fieldGroup.title, { subFieldName: subField.name, subFieldType: subField.type })
+          })
+        }
+      })
+    })
+    const addedFieldGroups = json.map(j => j.title)
+    return [ json, this.fieldGroups.filter(g => addedFieldGroups.includes(g.fullName)) ]
   }
 }
 

@@ -46,7 +46,8 @@ const getIds = async (fieldGroups) => {
     const args = await promise
     if (!fieldGroup.resolverFieldGroup) {
       argument = await captureArgumentWithMessage(
-        `\x1b[1m\x1b[41m\x1b[37mPlease enter the ID of the page or post associated with the field group "${fieldGroup.fullName}".\x1b[0m\n`
+        `\x1b[1m\x1b[41m\x1b[37mPlease enter the ID of the page or post associated with the field group "${fieldGroup.fullName}" \
+(Press "enter" to leave unchanged).\x1b[0m\n`
       )
     }
     return Promise.resolve(args.concat([ argument ]))
@@ -61,7 +62,7 @@ const getIds = async (fieldGroups) => {
  * @param {*} id
  */
 const setId = (json, id) => {
-  if (id === undefined) return json
+  if (id === undefined || !String(id)) return json
   return {
     ...json,
     ...{

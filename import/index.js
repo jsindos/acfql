@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 /**
  * This script is used to streamline the acf import process
  *

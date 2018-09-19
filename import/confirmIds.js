@@ -16,7 +16,8 @@ const confirmIds = async (DIR) => {
   /**
    * Parse the ACF JSON exports into the ACFStore
    */
-  return Promise.all(fs.readdirSync(DIR).map(async file => {
+  await fs.readdirSync(DIR).reduce(async (promise, file) => {
+    await promise
     /**
      * If a fieldGroup does not have an associated customPostType, then fieldGroup.resolverFieldGroup will be false
      * This means, for a given JSON export file, the fieldGroup in that file does not have a customPostType in the location,
@@ -32,22 +33,25 @@ const confirmIds = async (DIR) => {
           process.exit()
         }
 
-        console.log('\nThe ACF JSON export was updated with the specified ID.\n')
+        console.log(`\n"${file}" was updated with the specified ID.\n`)
         resolve()
       })
     })
-  }))
+  }, Promise.resolve())
 }
 
 const getIds = async (fieldGroups) => {
-  return Promise.all(fieldGroups.map(async g => {
-    if (!g.resolverFieldGroup) {
-      return captureArgumentWithMessage(
-        `\x1b[1m\x1b[41m\x1b[37mPlease enter the ID of the page or post associated with the field group "${g.fullName}".\x1b[0m\n`
+  const args = await fieldGroups.reduce(async (promise, fieldGroup) => {
+    let argument
+    const args = await promise
+    if (!fieldGroup.resolverFieldGroup) {
+      argument = await captureArgumentWithMessage(
+        `\x1b[1m\x1b[41m\x1b[37mPlease enter the ID of the page or post associated with the field group "${fieldGroup.fullName}".\x1b[0m\n`
       )
     }
-    return undefined
-  }))
+    return Promise.resolve(args.concat([ argument ]))
+  }, Promise.resolve([]))
+  return args
 }
 
 /**

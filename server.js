@@ -1,6 +1,7 @@
 const express = require('express')
 const { graphqlExpress, graphiqlExpress } = require('graphql-server-express')
 const bodyParser = require('body-parser')
+const cors = require('cors')
 const fs = require('fs')
 
 if (!fs.existsSync('./settings.js')) {
@@ -13,6 +14,7 @@ const { executableSchema } = require('./schema')
 const SERVER_PORT = 3001
 
 const server = express()
+server.use(cors())
 
 server.use('/graphql', bodyParser.json(), graphqlExpress((req) => {
   return {

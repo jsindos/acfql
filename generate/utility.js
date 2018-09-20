@@ -41,9 +41,16 @@ function updateObjectInArray (array, action) {
 }
 
 function writeFile (path, contents, cb) {
-  mkdirp(getDirName(path), function (err) {
-    if (err) return cb(err)
-    fs.writeFile(path, contents, cb)
+  return new Promise((resolve, reject) => {
+    mkdirp(getDirName(path), function (err) {
+      if (err) return cb(err)
+      fs.writeFile(path, contents, (err) => {
+        if (err) {
+          console.log(err)
+        }
+        resolve()
+      })
+    })
   })
 }
 

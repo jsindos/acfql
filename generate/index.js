@@ -51,18 +51,18 @@ const main = async () => {
    *
    * Builds to the '/graphql' directory in the root of the project
    */
-  Object.entries(templates).forEach(([ templatePath, { generateTemplate } ]) => {
+  await Promise.all(Object.entries(templates).map(async ([ templatePath, { generateTemplate } ]) => {
     const template = generateTemplate(store.customPostTypes, store.fieldGroups)
     if (Array.isArray(template)) {
-      template.forEach(t => {
+      template.map(async t => {
         const fileName = path.join(path.dirname(templatePath), `${t.fileName}.js`).replace(/src/, 'graphql')
-        writeFile(fileName, t.template, (err) => err && console.log(err))
+        await writeFile(fileName, t.template, (err) => err && console.log(err))
       })
     } else {
       const fileName = templatePath.replace(/.template/, '').replace(/src/, 'graphql')
-      writeFile(fileName, template, (err) => err && console.log(err))
+      await writeFile(fileName, template, (err) => err && console.log(err))
     }
-  })
+  }))
 
   console.log('Your graphql schema has been generated in "./graphql".')
   process.exit()

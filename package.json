@@ -2,9 +2,9 @@
   "name": "acfql",
   "version": "1.0.0",
   "description": "",
-  "main": "generate/index.js",
+  "main": "bin.js",
   "scripts": {
-    "build-schema": "rimraf graphql && node -e \"require('./generate')\"",
+    "build-schema": "node -e \"require('./generate')\"",
     "import": "node -e \"require('./import')\"",
     "test": "NODE_ENV=test BABEL_DISABLE_CACHE=1 node --trace-warnings -r babel-register ./test/RunTests.js",
     "test-watch": "npm test -- --watch",
@@ -22,17 +22,16 @@
     "graphql-type-json": "^0.2.1",
     "mysql2": "^1.6.1",
     "pluralize": "^7.0.0",
-    "sequelize": "^4.38.0"
+    "sequelize": "^4.38.0",
+    "rimraf": "^2.6.2"
   },
   "devDependencies": {
     "cross-spawn": "^6.0.5",
     "jest": "^23.4.1",
     "nodemon": "^1.18.3",
-    "rimraf": "^2.6.2",
     "sequelize-mock": "^0.10.2"
   },
   "bin": {
-    "import": "./import/index.js",
-    "build-schema": "./generate/index.js"
+    "acfql": "./bin.js"
   }
 }

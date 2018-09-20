@@ -23,20 +23,20 @@ const importAcf = require('./importAcf')
  */
 const DIR = './acf-exports'
 
-if (!fs.existsSync(path.join(__dirname, '..', DIR))) {
-  console.log('Please export your WordPress ACF fields to ./acf-exports using the advanced-custom-fields-wpcli tool before using the import tool (https://github.com/hoppinger/advanced-custom-fields-wpcli).')
-  process.exit()
-}
-
-console.log('Welcome to the import tool.\n')
-console.log(`\x1b[1mPlease be aware this tool deletes pre-existing ACF fields from your WordPress installation, \
-and imports those found in /acf-exports.\x1b[0m\n`)
-
 /**
  * main function
  * It is run as async as each step must wait for user input
  */
 const main = async () => {
+  if (!fs.existsSync(path.join(__dirname, '..', DIR))) {
+    console.log('Please export your WordPress ACF fields to ./acf-exports using the advanced-custom-fields-wpcli tool before using the import tool (https://github.com/hoppinger/advanced-custom-fields-wpcli).')
+    process.exit()
+  }
+
+  console.log('Welcome to the import tool.\n')
+  console.log(`\x1b[1mPlease be aware this tool deletes pre-existing ACF fields from your WordPress installation, \
+and imports those found in /acf-exports.\x1b[0m\n`)
+
   const absolutePathToProject = await captureArgumentWithMessage(
     `\x1b[1m\x1b[41m\x1b[37mPlease enter the absolute path to your WordPress project.\x1b[0m\n`
   )
@@ -46,4 +46,4 @@ const main = async () => {
   process.exit()
 }
 
-main()
+module.exports = main

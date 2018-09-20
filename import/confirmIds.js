@@ -1,13 +1,7 @@
 const fs = require('fs')
 const path = require('path')
 
-const ACFStore = require('../generate/acfstore')
 const captureArgumentWithMessage = require('./utility').captureArgumentWithMessage
-
-/**
- * Create the ACFStore that will store the information from our ACF JSON exports
- */
-const store = new ACFStore()
 
 /**
  * Confirm Ids of pages or posts found in acf-exports
@@ -18,11 +12,6 @@ const confirmIds = async (DIR) => {
    */
   await fs.readdirSync(DIR).reduce(async (promise, file) => {
     await promise
-    /**
-     * If a fieldGroup does not have an associated customPostType, then fieldGroup.resolverFieldGroup will be false
-     * This means, for a given JSON export file, the fieldGroup in that file does not have a customPostType in the location,
-     * and so is assumed to be tied to a specific page or post ID.
-     */
     const fieldGroups = JSON.parse(fs.readFileSync(path.join(__dirname, '..', DIR, file), 'utf8'))
     const ids = await getIds(fieldGroups)
     const updatedJson = fieldGroups.map((j, index) => setId(j, ids[index]))

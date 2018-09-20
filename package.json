@@ -8,7 +8,7 @@
     "import": "node -e \"require('./import')()\"",
     "test": "NODE_ENV=test BABEL_DISABLE_CACHE=1 node --trace-warnings -r babel-register ./test/RunTests.js",
     "test-watch": "npm test -- --watch",
-    "server": "nodemon server.js"
+    "server": "nodemon runServer.js"
   },
   "keywords": [],
   "author": "",

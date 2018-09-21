@@ -9,7 +9,7 @@ const exec = util.promisify(require('child_process').exec)
  */
 const importAcf = async (absolutePathToProject, DIR) => {
   return Promise.all(fs.readdirSync(DIR).map(async file => {
-    const pathToFile = path.join(__dirname, '..', DIR, file)
+    const pathToFile = path.join(process.cwd(), DIR, file)
     try {
       console.log(`Importing ${file}.\n`)
       const { stdout, stderr } = await exec(`cd ${absolutePathToProject} && \

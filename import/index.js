@@ -28,7 +28,7 @@ const DIR = './acf-exports'
  * It is run as async as each step must wait for user input
  */
 const main = async () => {
-  if (!fs.existsSync(path.join(__dirname, '..', DIR))) {
+  if (!fs.existsSync(path.join(process.cwd(), DIR))) {
     console.log('Please export your WordPress ACF fields to ./acf-exports using the advanced-custom-fields-wpcli tool before using the import tool (https://github.com/hoppinger/advanced-custom-fields-wpcli).')
     process.exit()
   }

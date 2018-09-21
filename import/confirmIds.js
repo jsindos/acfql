@@ -12,11 +12,11 @@ const confirmIds = async (DIR) => {
    */
   await fs.readdirSync(DIR).reduce(async (promise, file) => {
     await promise
-    const fieldGroups = JSON.parse(fs.readFileSync(path.join(__dirname, '..', DIR, file), 'utf8'))
+    const fieldGroups = JSON.parse(fs.readFileSync(path.join(process.cwd(), DIR, file), 'utf8'))
     const ids = await getIds(fieldGroups)
     const updatedJson = fieldGroups.map((j, index) => setId(j, ids[index]))
     return new Promise((resolve, reject) => {
-      fs.writeFile(path.join(__dirname, '..', DIR, file), JSON.stringify(updatedJson, null, 4), function (err) {
+      fs.writeFile(path.join(process.cwd(), DIR, file), JSON.stringify(updatedJson, null, 4), function (err) {
         if (err) {
           console.log(err)
           process.exit()

@@ -130,7 +130,7 @@ class ACFStore {
    * @returns fieldGroups added
    */
   parseFile (file, DIR) {
-    const json = JSON.parse(fs.readFileSync(path.join(__dirname, '..', DIR, file), 'utf8'))
+    const json = JSON.parse(fs.readFileSync(path.join(process.cwd(), DIR, file), 'utf8'))
     json.forEach(fieldGroup => {
       fieldGroup.location.forEach(location => {
         location.forEach(l => {

@@ -1,5 +1,5 @@
-const { privateSettings, publicSettings } = require('./settings')
-const { Definitions, Database: ACFDatabase, Resolvers: ACFResolvers } = require('./graphql')
+const { privateSettings, publicSettings } = require(`${process.cwd()}/settings`)
+const { Definitions, Database: ACFDatabase, Resolvers: ACFResolvers } = require(`${process.cwd()}/graphql`)
 const { makeExecutableSchema } = require('graphql-tools')
 const GraphQLJSON = require('graphql-type-json')
 

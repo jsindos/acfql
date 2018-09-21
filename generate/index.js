@@ -23,7 +23,7 @@ const main = async () => {
   /**
    * Get a list of our schema generation template files, using a require.context polyfill
    */
-  const templates = require.context(path.join(__dirname, '..'), true, /^(?!.*node_modules).*\.template\.js$/)
+  const templates = require.context(path.join(__dirname, '..'), true, /(?!.*node_modules).*\.template\.js$/)
 
   /**
    * Create the ACFStore that will store the information from our ACF JSON exports
@@ -35,7 +35,7 @@ const main = async () => {
    */
   const DIR = './acf-exports'
 
-  if (!fs.existsSync(path.join(__dirname, '..', DIR))) {
+  if (!fs.existsSync(path.join(process.cwd(), DIR))) {
     console.log('Please export your WordPress ACF fields to ./acf-exports using the advanced-custom-fields-wpcli tool (https://github.com/hoppinger/advanced-custom-fields-wpcli).')
     process.exit()
   }

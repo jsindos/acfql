@@ -19,6 +19,7 @@ process.argv.slice(2).filter(function (arg) {
 })
 
 async function go () {
+  console.log(process.env.PWD)
   if (isImportAcf) {
     importAcf()
   } else if (isBuildSchema) {
@@ -34,7 +35,7 @@ async function go () {
     console.log('')
     console.log('  import       Run acf import')
     console.log('  build-schema Build acfql schema')
-    console.log('  server Runs the graphql server')
+    console.log('  server       Runs the graphql server')
     process.exit()
   }
 }

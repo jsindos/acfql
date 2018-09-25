@@ -50,6 +50,7 @@ describe('nestedFieldGroups', () => {
 
   it('retrieves fields for post and page custom fields nested under the field group name', async () => {
     const customFields = await getCustomFields(PostMock, PostmetaMock)({ postId: 40 })
+    console.log(customFields)
     expect(customFields).toMatchShapeOf({
       appleInformation: {
         location: ''

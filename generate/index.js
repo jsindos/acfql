@@ -45,6 +45,8 @@ const main = async () => {
    */
   store.parse(DIR)
 
+  console.log(JSON.stringify(store.fieldGroups, null, 2))
+
   /**
    * For each schema generation template file,
    * generate the template using the customPostTypes and fieldGroups found in the ACF JSON exports

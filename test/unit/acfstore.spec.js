@@ -85,7 +85,8 @@ describe('acfstore', () => {
       const a = new ACFStore()
       a.addFieldGroup('Apple Information')
       a.addField('apple_information_images', 'Images', 'Apple Information', 'repeater')
-      a.addFieldSubField('apple_information_images', 'Apple Information', { subFieldName: 'image', subFieldType: 'image' })
+      a.addFieldSubField('apple_information_images', 'Apple Information',
+        { subFieldName: 'apple_information_images_image', subFieldLabel: 'Image', subFieldType: 'image' })
       expect(a.fieldGroups).toMatchSnapshot()
     })
   })

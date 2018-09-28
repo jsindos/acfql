@@ -106,12 +106,12 @@ class ACFStore {
    *
    * TODO: If called twice with the same arguments, will double up results. We do not want this behaviour.
    */
-  addFieldSubField (fieldName, fieldGroupName, { subFieldName, subFieldType }) {
+  addFieldSubField (fieldName, fieldGroupName, { subFieldName, subFieldLabel, subFieldType }) {
     const newFields = concatenateArrayInObjectInArray(
       this.fieldGroups.find(g => g.fullName === fieldGroupName).fields,
       {
         find: [ 'fieldName', fieldName ],
-        update: [ { subFieldName, subFieldType } ],
+        update: [ { subFieldName, subFieldLabel, subFieldType } ],
         updateKey: 'subFields'
       }
     )
@@ -151,7 +151,11 @@ class ACFStore {
         this.addField(field.name, field.label, fieldGroup.title, field.type)
         if (field.type === 'repeater') {
           field.sub_fields.forEach(subField => {
-            this.addFieldSubField(field.name, fieldGroup.title, { subFieldName: subField.name, subFieldType: subField.type })
+            this.addFieldSubField(field.name, fieldGroup.title, {
+              subFieldName: subField.name,
+              subFieldLabel: camelize(subField.label),
+              subFieldType: subField.type
+            })
           })
         }
       })

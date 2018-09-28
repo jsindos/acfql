@@ -10,7 +10,8 @@ Array [
         "fullName": "images",
         "subFields": Array [
           Object {
-            "subFieldName": "image",
+            "subFieldLabel": "Image",
+            "subFieldName": "apple_information_images_image",
             "subFieldType": "image",
           },
         ],

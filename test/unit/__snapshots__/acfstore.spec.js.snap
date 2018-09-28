@@ -6,7 +6,7 @@ Array [
     "fields": Array [
       Object {
         "connectorName": "getAppleInformationImages",
-        "fieldName": "images",
+        "fieldName": "apple_information_images",
         "fullName": "images",
         "subFields": Array [
           Object {

@@ -6,9 +6,9 @@ const applyHandlers = require('../utilities').applyHandlers
 const getAppleInformationLocation = require('../../graphql/modules/CustomFields/connectors/getAppleInformationLocation')
 const getPosts = require('../../graphql/modules/Post/connectors/getPosts')
 
-const samplePostmetaData = require('./i18nSampleData/Postmeta')
-const samplePostData = require('./i18nSampleData/Post')
-const sampleTermTaxonomyData = require('./i18nSampleData/TermTaxonomy')
+const samplePostmetaData = require('./sampleData1/Postmeta')
+const samplePostData = require('./sampleData1/Post')
+const sampleTermTaxonomyData = require('./sampleData1/TermTaxonomy')
 
 describe('internationalisation', () => {
   let PostMock, PostmetaMock, TermTaxonomyMock

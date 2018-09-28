@@ -60,7 +60,7 @@ describe('acfstore', () => {
     it('addField camelizes', () => {
       const a = new ACFStore()
       a.addFieldGroup('Apple Information')
-      a.addField('ripening_time', 'Apple Information')
+      a.addField('ripening_time', 'Ripening Time', 'Apple Information')
       expect(a.fieldGroups.find(g => g.fullName === 'Apple Information').fields.find(f => f.fullName === 'ripeningTime')).toBeTruthy()
     })
 
@@ -84,8 +84,8 @@ describe('acfstore', () => {
     it('addFieldSubField', () => {
       const a = new ACFStore()
       a.addFieldGroup('Apple Information')
-      a.addField('images', 'Apple Information', 'repeater')
-      a.addFieldSubField('images', 'Apple Information', { subFieldName: 'image', subFieldType: 'image' })
+      a.addField('apple_information_images', 'Images', 'Apple Information', 'repeater')
+      a.addFieldSubField('apple_information_images', 'Apple Information', { subFieldName: 'image', subFieldType: 'image' })
       expect(a.fieldGroups).toMatchSnapshot()
     })
   })

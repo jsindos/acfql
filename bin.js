@@ -8,6 +8,7 @@ let isImportAcf = false
 let isBuildSchema = false
 let isServer = false
 
+// Copied from rimraf bin.js
 process.argv.slice(2).filter(function (arg) {
   if (arg.includes('import')) {
     isImportAcf = true

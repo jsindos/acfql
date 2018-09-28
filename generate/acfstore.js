@@ -76,12 +76,20 @@ class ACFStore {
       } ])
   }
 
-  addField (fieldName, fieldGroupName, type = 'text') {
+  /**
+   * Adds a field to a field group
+   *
+   * @param {String} fieldName - The internal name of the field
+   * @param {String} fieldLabel - The display name of the field
+   * @param {String} fieldGroupName
+   * @param {String} type
+   */
+  addField (fieldName, fieldLabel, fieldGroupName, type = 'text') {
     this.fieldGroups = concatenateArrayInObjectInArray(this.fieldGroups, {
       find: [ 'fullName', fieldGroupName ],
       update: [ {
-        fullName: camelize(fieldName),
-        connectorName: camelize(`get ${fieldGroupName} ${fieldName}`),
+        fullName: camelize(fieldLabel),
+        connectorName: camelize(`get ${fieldGroupName} ${fieldLabel}`),
         type,
         fieldName: fieldName,
         subFields: []
@@ -127,7 +135,7 @@ class ACFStore {
    * Parse a single ACF JSON export
    * @param {*} file
    * @param {*} DIR
-   * @returns fieldGroups added
+   * @returns [ parsedJson, fieldGroups ]
    */
   parseFile (file, DIR) {
     const json = JSON.parse(fs.readFileSync(path.join(process.cwd(), DIR, file), 'utf8'))
@@ -140,7 +148,7 @@ class ACFStore {
       })
       this.addFieldGroup(fieldGroup.title)
       fieldGroup.fields.forEach(field => {
-        this.addField(field.name, fieldGroup.title, field.type)
+        this.addField(field.name, field.label, fieldGroup.title, field.type)
         if (field.type === 'repeater') {
           field.sub_fields.forEach(subField => {
             this.addFieldSubField(field.name, fieldGroup.title, { subFieldName: subField.name, subFieldType: subField.type })

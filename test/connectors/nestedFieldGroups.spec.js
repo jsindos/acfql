@@ -6,8 +6,8 @@ const applyHandlers = require('../utilities').applyHandlers
 
 const getCustomFields = require('../../graphql/modules/Post/connectors/getCustomFields')
 
-const samplePostmetaData = require('./nestedFieldGroupsSampleData/Postmeta')
-const samplePostData = require('./nestedFieldGroupsSampleData/Post')
+const samplePostmetaData = require('./sampleData2/Postmeta')
+const samplePostData = require('./sampleData2/Post')
 
 expect.extend({
   toMatchOneOf,
@@ -50,7 +50,6 @@ describe('nestedFieldGroups', () => {
 
   it('retrieves fields for post and page custom fields nested under the field group name', async () => {
     const customFields = await getCustomFields(PostMock, PostmetaMock)({ postId: 40 })
-    console.log(customFields)
     expect(customFields).toMatchShapeOf({
       appleInformation: {
         location: ''
@@ -60,4 +59,12 @@ describe('nestedFieldGroups', () => {
       }
     })
   })
+
+  it('retrieves fields that have the same name under different field groups', async () => {
+    const customFields = await getCustomFields(PostMock, PostmetaMock)({ postId: 40 })
+  })
+
+  // it('retrieves repeater fields that have the same name under different field groups', async () => {
+  //   const customFields = await getCustomFields(PostMock, PostmetaMock)({ postId: 40 })
+  // })
 })

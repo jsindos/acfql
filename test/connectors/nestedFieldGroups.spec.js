@@ -50,7 +50,7 @@ describe('nestedFieldGroups', () => {
 
   it('retrieves fields for post and page custom fields nested under the field group name', async () => {
     const customFields = await getCustomFields(PostMock, PostmetaMock)({ postId: 40 })
-    // retrieves fields that have the same name under different field groups
+    // Retrieves fields that have the same name under different field groups
     expect(customFields).toMatchShapeOf({
       appleInformation: {
         location: ''
@@ -63,9 +63,9 @@ describe('nestedFieldGroups', () => {
     expect(customFields.orangeInformation.location).toEqual('Orange')
   })
 
-  it.skip('retrieves repeater fields that have the same name under different field groups', async () => {
+  it('retrieves repeater fields that have the same name under different field groups', async () => {
     const customFields = await getCustomFields(PostMock, PostmetaMock)({ postId: 40 })
-    console.log(JSON.stringify(customFields))
+    // console.log(JSON.stringify(customFields))
     expect(customFields).toMatchShapeOf({
       appleInformation: {
         photos: [
@@ -83,6 +83,6 @@ describe('nestedFieldGroups', () => {
       }
     })
     expect(customFields.appleInformation.photos).toContainEqual(expect.objectContaining({ photo: 'apple_photo_one' }))
-    expect(customFields.appleInformation.photos).toContainEqual(expect.objectContaining({ photo: 'orange_photo_one' }))
+    expect(customFields.orangeInformation.photos).toContainEqual(expect.objectContaining({ photo: 'orange_photo_one' }))
   })
 })

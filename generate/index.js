@@ -45,7 +45,7 @@ const main = async () => {
    */
   store.parse(DIR)
 
-  console.log(JSON.stringify(store.fieldGroups, null, 2))
+  // console.log(JSON.stringify(store.fieldGroups, null, 2))
 
   /**
    * For each schema generation template file,

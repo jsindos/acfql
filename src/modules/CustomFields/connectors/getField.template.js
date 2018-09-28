@@ -1,3 +1,5 @@
+/* eslint-disable indent */
+
 const generateTemplates = (customPostTypes, fieldGroups) =>
   fieldGroups.reduce((prev, current) => [ ...prev, ...current.fields ], []).map(field =>
     ({
@@ -8,7 +10,9 @@ const generateTemplates = (customPostTypes, fieldGroups) =>
             // 1. Need to handle special case for image subfields of a repeater
             // 2. Also not sure if repeater field logic is sound against multiple repeaters with the same name, will have to check
             // This is an edge case though
-            return `module.exports = (Post, Postmeta) => {
+            return `const subFields = ${JSON.stringify(field.subFields, null, 2)}
+
+module.exports = (Post, Postmeta) => {
 return function ({ postId }) {
   return Post.findAll({
     where: {
@@ -26,7 +30,10 @@ return function ({ postId }) {
         return postMetas.filter(pm => posts.map(p => p.post_name).includes(pm.meta_value))
           .map(pm => ({
             ...pm.dataValues,
-            key: posts.find(p => p.post_name === pm.meta_value).post_excerpt,
+            key: (
+              subFields.find(({ subFieldName }) => subFieldName === posts.find(p => p.post_name === pm.meta_value).post_excerpt) ||
+              {}
+            ).subFieldLabel,
             value: postMetas.find(ppm => ppm.meta_key === pm.meta_key.substring(1))
               && postMetas.find(ppm => ppm.meta_key === pm.meta_key.substring(1)).meta_value,
             index: pm.meta_key.match(/^_${field.fieldName}_(\\d{1})/) && Number(pm.meta_key.match(/^_${field.fieldName}_(\\d{1})/)[1])

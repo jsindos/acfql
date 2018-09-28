@@ -11,7 +11,6 @@ describe('generate schema files', () => {
     a.addCustomPostType('wp_apple')
     a.addFieldGroupRelation('wp_apple', 'Apple Information')
     a.addFieldGroup('Apple Information')
-    a.addField('cultivar', 'Apple Information')
     expect(generateSchemaTemplate(a.customPostTypes, a.fieldGroups)).toMatchSnapshot()
   })
 
@@ -21,7 +20,6 @@ describe('generate schema files', () => {
     a.addFieldGroupRelation('wp_apple', 'Apple Information', 'post_type')
     a.addFieldGroupRelation('wp_apple', 'Other Information', 'post_type')
     a.addFieldGroup('Apple Information')
-    a.addField('cultivar', 'Apple Information')
     const templates = generateCustomPostTypeTemplate(a.customPostTypes, a.fieldGroups)
     expect(templates.find(t => t.fileName === 'Apple').template).toMatchSnapshot()
   })

@@ -55,7 +55,7 @@ describe('nestedFieldGroups', () => {
         location: ''
       },
       orangeInformation: {
-        locale: ''
+        location: ''
       }
     })
   })

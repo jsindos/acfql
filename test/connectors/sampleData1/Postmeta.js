@@ -52,19 +52,19 @@ module.exports = {
     {
       'meta_id': 11,
       'post_id': 8,
-      'meta_key': 'location',
+      'meta_key': 'apple_information_location',
       'meta_value': 'Queensland'
     },
     {
       'meta_id': 12,
       'post_id': 8,
-      'meta_key': '_location',
+      'meta_key': '_apple_information_location',
       'meta_value': 'field_5b9463b1899bc'
     },
     {
       'meta_id': 13,
       'post_id': 12,
-      'meta_key': 'location',
+      'meta_key': 'apple_information_location',
       'meta_value': ' Dronningjord'
     },
     {
@@ -82,7 +82,7 @@ module.exports = {
     {
       'meta_id': 16,
       'post_id': 12,
-      'meta_key': '_location',
+      'meta_key': '_apple_information_location',
       'meta_value': 'field_5b9463b1899bc'
     },
     {
@@ -94,7 +94,7 @@ module.exports = {
     {
       'meta_id': 18,
       'post_id': 14,
-      'meta_key': 'location',
+      'meta_key': 'apple_information_location',
       'meta_value': ' Königinland'
     },
     {
@@ -112,7 +112,7 @@ module.exports = {
     {
       'meta_id': 21,
       'post_id': 14,
-      'meta_key': '_location',
+      'meta_key': '_apple_information_location',
       'meta_value': 'field_5b9463b1899bc'
     },
     {
@@ -124,13 +124,13 @@ module.exports = {
     {
       'meta_id': 23,
       'post_id': 16,
-      'meta_key': 'location',
+      'meta_key': 'apple_information_location',
       'meta_value': ''
     },
     {
       'meta_id': 24,
       'post_id': 16,
-      'meta_key': '_location',
+      'meta_key': '_apple_information_location',
       'meta_value': 'field_5b9463b1899bc'
     },
     {
@@ -142,7 +142,7 @@ module.exports = {
     {
       'meta_id': 26,
       'post_id': 17,
-      'meta_key': 'location',
+      'meta_key': 'apple_information_location',
       'meta_value': ''
     },
     {
@@ -160,7 +160,7 @@ module.exports = {
     {
       'meta_id': 29,
       'post_id': 17,
-      'meta_key': '_location',
+      'meta_key': '_apple_information_location',
       'meta_value': 'field_5b9463b1899bc'
     }
   ]

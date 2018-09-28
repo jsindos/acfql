@@ -40,7 +40,7 @@ return function ({ postId }) {
           }, [])
           .sort((a, b) => a.index > b.index)
       }
-    })${field.subFields.find(s => s.subFieldType === 'image') && `.then(repeaterArray => {
+    })${field.subFields.find(s => s.subFieldType === 'image') ? `.then(repeaterArray => {
       let repeaterArrayWithImages = []
       return repeaterArray.reduce((promise, repeaterEntry) => {
         return promise
@@ -62,7 +62,7 @@ return function ({ postId }) {
           })
       }, Promise.resolve())
       .then(() => repeaterArrayWithImages.sort((a, b) => a.index > b.index))
-    })`}
+    })` : ''}
   })
 }
 }

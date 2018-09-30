@@ -4,7 +4,7 @@ const camelize = require('../../../../generate/utility').camelize
 
 module.exports.generateTemplate = (customPostTypes, fieldGroups) =>
 `const customFieldConnectors = require('../../CustomFields/connectors/index')
-const camelize = require('../../../../generate/utility').camelize
+const camelize = require('../../../utility').camelize
 
 const updateObjectInObject = (object, key, update) => {
   return Object.entries(object).map(([ k, item ]) => {

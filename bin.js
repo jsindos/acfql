@@ -1,8 +1,8 @@
 #!/usr/bin/env node
+const exec = require('child_process').exec
 
 const importAcf = require('./import')
 const buildSchema = require('./generate')
-const server = require('./server')
 
 let isImportAcf = false
 let isBuildSchema = false
@@ -20,13 +20,24 @@ process.argv.slice(2).filter(function (arg) {
 })
 
 async function go () {
-  console.log(process.env.PWD)
   if (isImportAcf) {
     importAcf()
   } else if (isBuildSchema) {
     buildSchema()
   } else if (isServer) {
-    server()
+    // https://stackoverflow.com/questions/38288639/how-to-use-npm-scripts-within-javascript
+    const child = exec(`${__dirname}/node_modules/.bin/nodemon ${__dirname}/runServer.js`)
+    child.stdout.on('data', function (data) {
+      process.stdout.write(data)
+    })
+
+    child.stderr.on('data', function (data) {
+      process.stdout.write(data)
+    })
+
+    child.on('exit', function (data) {
+      process.stdout.write('I\'m done!')
+    })
   } else {
     console.log('Usage: acfql <import|build-schema|server>')
     console.log('')

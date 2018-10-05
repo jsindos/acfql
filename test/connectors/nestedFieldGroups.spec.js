@@ -73,7 +73,15 @@ describe('nestedFieldGroups', () => {
             photo: ''
           }
         ]
-      },
+      }
+    })
+    expect(customFields.appleInformation.photos).toContainEqual(expect.objectContaining({ photo: 'apple_photo_one' }))
+  })
+
+  it('repeater field image', async () => {
+    const customFields = await getCustomFields(PostMock, PostmetaMock)({ postId: 40 })
+    // console.log(JSON.stringify(customFields))
+    expect(customFields).toMatchShapeOf({
       orangeInformation: {
         photos: [
           {
@@ -82,7 +90,6 @@ describe('nestedFieldGroups', () => {
         ]
       }
     })
-    expect(customFields.appleInformation.photos).toContainEqual(expect.objectContaining({ photo: 'apple_photo_one' }))
-    expect(customFields.orangeInformation.photos).toContainEqual(expect.objectContaining({ photo: 'orange_photo_one' }))
+    expect(customFields.orangeInformation.photos).toContainEqual(expect.objectContaining({ photo: 'http://testpress.localhost/wp-content/uploads/2018/10/Emma-Watson-Wallpapers-sayou-30461666-1600-1200-1.jpg' }))
   })
 })

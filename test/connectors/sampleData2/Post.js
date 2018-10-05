@@ -425,6 +425,31 @@ module.exports = {
       'post_type': 'revision',
       'post_mime_type': '',
       'comment_count': 0
+    },
+    {
+      'ID': 56,
+      'post_author': 1,
+      'post_date': '2018-10-05 13:32:36',
+      'post_date_gmt': '2018-10-05 13:32:36',
+      'post_content': '',
+      'post_title': 'Emma-Watson-Wallpapers-sayou-30461666-1600-1200',
+      'post_excerpt': '',
+      'post_status': 'inherit',
+      'comment_status': 'open',
+      'ping_status': 'closed',
+      'post_password': '',
+      'post_name': 'emma-watson-wallpapers-sayou-30461666-1600-1200',
+      'to_ping': '',
+      'pinged': '',
+      'post_modified': '2018-10-05 13:32:38',
+      'post_modified_gmt': '2018-10-05 13:32:38',
+      'post_content_filtered': '',
+      'post_parent': 40,
+      'guid': 'http://testpress.localhost/wp-content/uploads/2018/10/Emma-Watson-Wallpapers-sayou-30461666-1600-1200-1.jpg',
+      'menu_order': 0,
+      'post_type': 'attachment',
+      'post_mime_type': 'image/jpeg',
+      'comment_count': 0
     }
   ]
 }

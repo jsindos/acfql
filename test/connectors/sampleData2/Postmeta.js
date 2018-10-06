@@ -72,6 +72,18 @@ module.exports = {
       'post_id': 40,
       'meta_key': '_orange_information_photos',
       'meta_value': 'field_5bade3e7f2558'
+    },
+    {
+      'meta_id': 125,
+      'post_id': 40,
+      'meta_key': 'orange_information_photos_0_orange_information_photos_other_photo',
+      'meta_value': '60'
+    },
+    {
+      'meta_id': 126,
+      'post_id': 40,
+      'meta_key': '_orange_information_photos_0_orange_information_photos_other_photo',
+      'meta_value': 'field_5bb8a2cb28811'
     }
   ]
 }

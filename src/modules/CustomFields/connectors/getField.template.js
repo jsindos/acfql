@@ -40,36 +40,37 @@ return function ({ postId }) {
           }))
           // Filter those that didn't have an index appearing in the name of the meta_key
           .filter(pm => Number.isInteger(pm.index))
+          // Organise the repeater fields into their respective entries
           .reduce((accumulator, currentValue) => {
             const group = accumulator.find(a => a.index === currentValue.index) || { index: currentValue.index }
             const newGroup = { ...group, [currentValue.key]: currentValue.value }
             return accumulator.filter(a => a.index !== currentValue.index).concat([ newGroup ])
           }, [])
+          // Sort the entries
           .sort((a, b) => a.index > b.index)
       }
-    })${field.subFields.find(s => s.subFieldType === 'image') ? `.then(repeaterArray => {
+    })${field.subFields.filter(s => s.subFieldType === 'image').map(s =>
+`.then(repeaterArray => {
       let repeaterArrayWithImages = []
       return repeaterArray.reduce((promise, repeaterEntry) => {
         return promise
           .then(result => {
-            // repeaterEntry.find
-            // Object.entries(r).map([ key, value ]
             Post.findOne({
               where: {
-                id: Number(repeaterEntry.${field.subFields.find(s => s.subFieldType === 'image').subFieldName})
+                id: Number(repeaterEntry.${s.subFieldName})
               }
             }).then(result =>
               result
               ? repeaterArrayWithImages.push({
                 ...repeaterEntry,
-                ${field.subFields.find(s => s.subFieldType === 'image').subFieldName}: result.guid
+                ${s.subFieldName}: result.guid
               })
               : repeaterArrayWithImages.push(repeaterEntry)
             )
           })
       }, Promise.resolve())
       .then(() => repeaterArrayWithImages.sort((a, b) => a.index > b.index))
-    })` : ''}
+    })`).join('')}
   })
 }
 }

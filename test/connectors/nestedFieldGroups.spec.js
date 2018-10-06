@@ -85,11 +85,15 @@ describe('nestedFieldGroups', () => {
       orangeInformation: {
         photos: [
           {
-            photo: ''
+            photo: '',
+            otherPhoto: ''
           }
         ]
       }
     })
-    expect(customFields.orangeInformation.photos).toContainEqual(expect.objectContaining({ photo: 'http://testpress.localhost/wp-content/uploads/2018/10/Emma-Watson-Wallpapers-sayou-30461666-1600-1200-1.jpg' }))
+    expect(customFields.orangeInformation.photos).toContainEqual(expect.objectContaining({
+      photo: 'http://testpress.localhost/wp-content/uploads/2018/10/Emma-Watson-Wallpapers-sayou-30461666-1600-1200-1.jpg',
+      otherPhoto: 'http://testpress.localhost/wp-content/uploads/2018/10/IMG_0376.jpg'
+    }))
   })
 })

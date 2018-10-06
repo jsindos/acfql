@@ -50,26 +50,25 @@ return function ({ postId }) {
           .sort((a, b) => a.index > b.index)
       }
     })${field.subFields.filter(s => s.subFieldType === 'image').map(s =>
-`.then(repeaterArray => {
-      let repeaterArrayWithImages = []
-      return repeaterArray.reduce((promise, repeaterEntry) => {
-        return promise
-          .then(result => {
-            Post.findOne({
-              where: {
-                ID: Number(repeaterEntry.${s.subFieldLabel})
-              }
-            }).then(result =>
-              result
-              ? repeaterArrayWithImages.push({
-                ...repeaterEntry,
-                ${s.subFieldLabel}: result.guid
-              })
-              : repeaterArrayWithImages.push(repeaterEntry)
-            )
-          })
-      }, Promise.resolve())
-      .then(() => repeaterArrayWithImages.sort((a, b) => a.index > b.index))
+`.then(async repeaterArray => {
+      const values = await repeaterArray.reduce(async (repeaterArrayWithImages, repeaterEntry) => {
+        const image = await Post.findOne({
+          where: {
+            ID: Number(repeaterEntry.${s.subFieldLabel})
+          }
+        })
+        if (image) {
+          return repeaterArrayWithImages.concat([
+            {
+              ...repeaterEntry,
+              ${s.subFieldLabel}: image.guid
+            }
+          ])
+        } else {
+          return repeaterArrayWithImages.concat([ repeaterEntry ])
+        }
+      }, [])
+      return values.sort((a, b) => a.index > b.index)
     })`).join('')}
   })
 }

@@ -26,7 +26,7 @@ async function go () {
     buildSchema()
   } else if (isServer) {
     // https://stackoverflow.com/questions/38288639/how-to-use-npm-scripts-within-javascript
-    const child = exec(`${__dirname}/node_modules/.bin/nodemon ${__dirname}/runServer.js --ansi`)
+    const child = exec(`${process.cwd()}/node_modules/.bin/nodemon ${__dirname}/runServer.js --ansi`)
     child.stdout.on('data', function (data) {
       process.stdout.write(data)
     })

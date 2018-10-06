@@ -57,13 +57,13 @@ return function ({ postId }) {
           .then(result => {
             Post.findOne({
               where: {
-                id: Number(repeaterEntry.${s.subFieldName})
+                ID: Number(repeaterEntry.${s.subFieldLabel})
               }
             }).then(result =>
               result
               ? repeaterArrayWithImages.push({
                 ...repeaterEntry,
-                ${s.subFieldName}: result.guid
+                ${s.subFieldLabel}: result.guid
               })
               : repeaterArrayWithImages.push(repeaterEntry)
             )

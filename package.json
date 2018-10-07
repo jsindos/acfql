@@ -2,7 +2,7 @@
   "name": "acfql",
   "version": "1.0.0",
   "description": "",
-  "main": "bin.js",
+  "main": "schema.js",
   "scripts": {
     "build-schema": "node -e \"require('./generate')()\"",
     "import": "node -e \"require('./import')()\"",

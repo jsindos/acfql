@@ -1,7 +1,9 @@
+/* eslint-disable indent */
+
 function generateTemplate (customPostTypes, fieldGroups) {
   return `${fieldGroups.map(g =>
 `// ${g.fullCaseName} fields
-${g.fields.map(f => 
+${g.fields.map(f =>
 `const ${f.connectorName} = require('./${f.connectorName}')
 `).join('')}
 `
@@ -20,6 +22,5 @@ function Connectors ({ Post, Postmeta }) {
 module.exports = Connectors
 `
 }
-  
+
 module.exports.generateTemplate = generateTemplate
-  

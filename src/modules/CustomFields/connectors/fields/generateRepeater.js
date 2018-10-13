@@ -46,6 +46,7 @@ module.exports = (Post, Postmeta) => {
       })${field.subFields.filter(s => s.subFieldType === 'image').map(s =>
   `.then(async repeaterArray => {
         const values = await repeaterArray.reduce(async (repeaterArrayWithImages, repeaterEntry) => {
+          await repeaterArrayWithImages
           const image = await Post.findOne({
             where: {
               ID: Number(repeaterEntry.${s.subFieldLabel})

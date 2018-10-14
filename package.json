@@ -6,6 +6,7 @@
   "scripts": {
     "build-schema": "node -e \"require('./generate')()\"",
     "import": "node -e \"require('./import')()\"",
+    "defaults": "node -e \"require('./defaults')()\"",
     "test": "NODE_ENV=test BABEL_DISABLE_CACHE=1 node --trace-warnings -r babel-register ./test/RunTests.js",
     "test-watch": "npm test -- --watch",
     "server": "nodemon runServer.js"

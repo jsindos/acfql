@@ -3,10 +3,12 @@ const exec = require('child_process').exec
 
 const importAcf = require('./import')
 const buildSchema = require('./generate')
+const generateDefaults = require('./defaults')
 
 let isImportAcf = false
 let isBuildSchema = false
 let isServer = false
+let isDefaults = false
 
 // Copied from rimraf bin.js
 process.argv.slice(2).filter(function (arg) {
@@ -16,6 +18,8 @@ process.argv.slice(2).filter(function (arg) {
     isBuildSchema = true
   } else if (arg.includes('server')) {
     isServer = true
+  } else if (arg.includes('defaults')) {
+    isDefaults = true
   }
 })
 
@@ -38,8 +42,10 @@ async function go () {
     child.on('exit', function (data) {
       process.stdout.write('I\'m done!')
     })
+  } else if (isDefaults) {
+    generateDefaults()
   } else {
-    console.log('Usage: acfql <import|build-schema|server>')
+    console.log('Usage: acfql <import|build-schema|server|defaults>')
     console.log('')
     console.log('  Runs an acfql command.')
     console.log('')
@@ -48,6 +54,7 @@ async function go () {
     console.log('  import       Run acf import')
     console.log('  build-schema Build acfql schema')
     console.log('  server       Runs the graphql server')
+    console.log('  defaults     Generate defaults for custom fields')
     process.exit()
   }
 }

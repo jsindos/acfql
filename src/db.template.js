@@ -28,7 +28,7 @@ class Database {
       username,
       password,
       {
-        logging: dev
+        logging: this.settings.devMode
           ? (s) => console.log(\`\${increment++}: \${s}\`)
           : false,
         dialect: 'mysql',

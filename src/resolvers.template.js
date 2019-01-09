@@ -25,6 +25,9 @@ module.exports.generateTemplate = (customPostTypes, fieldGroups) =>
     Post: {
       customFields (post) {
         return Connectors.getCustomFields({ postId: post.ID })
+      },
+      featuredImage (post) {
+        return Connectors.getFeaturedImage({ postId: post.ID })
       }
     },
     

@@ -4,9 +4,13 @@ module.exports.generateTemplate = () =>
 `const Post = \`
   type Post {
     ID: Int
-    post_title: String
-    post_content: String
+    postTitle: String
+    postContent: String
     customFields: JSON
+    featuredImage: String
+    postName: String
+    guid: String
+    postExcerpt: String
   }
 \`
 

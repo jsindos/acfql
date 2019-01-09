@@ -1,6 +1,10 @@
-module.exports.generateTemplate = () =>
-`const Sequelize = require('sequelize')
+/* eslint-disable indent */
+
+module.exports.generateTemplate = () => `\
+const Sequelize = require('sequelize')
 const Op = Sequelize.Op
+
+const camelizeObjectKeys = require('../../../utility').camelizeObjectKeys
 
 module.exports = function (Post) {
   return function ({ name, id: postId, postType }) {
@@ -15,7 +19,7 @@ module.exports = function (Post) {
 
     return Post.findOne({
       where: where,
-    })
+    }).then(post => camelizeObjectKeys(post))
   }
 }
 `

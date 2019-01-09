@@ -8,5 +8,11 @@ function camelize (str, fullCase = false) {
   }).replace(/\\s+/g, '')
 }
 
+function camelizeObjectKeys (object) {
+  return Object.entries(object.dataValues || object)
+    .reduce((acc, [ key, value ]) => ({ ...acc, ...{ [key === 'ID' ? 'ID' : camelize(key)]: value } }), {})
+}
+
 module.exports.camelize = camelize
+module.exports.camelizeObjectKeys = camelizeObjectKeys
 `

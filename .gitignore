@@ -2,3 +2,4 @@ node_modules/
 graphql/
 acf-exports/
 settings.js
+.DS_Store

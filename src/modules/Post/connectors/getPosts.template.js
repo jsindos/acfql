@@ -1,6 +1,10 @@
-module.exports.generateTemplate = () =>
-  `const Sequelize = require('sequelize')
+/* eslint-disable indent */
+
+module.exports.generateTemplate = () => `\
+const Sequelize = require('sequelize')
 const Op = Sequelize.Op
+
+const camelizeObjectKeys = require('../../../utility').camelizeObjectKeys
 
 module.exports = function (Post, Terms, TermRelationships, TermTaxonomy, settings) {
   return function({ postType, category, order, limit = 10, skip = 0, userId, language }) {
@@ -46,7 +50,7 @@ module.exports = function (Post, Terms, TermRelationships, TermTaxonomy, setting
               categoryPosts.push(post)
             )
         }, Promise.resolve())
-        .then(() => categoryPosts)
+        .then(() => categoryPosts.map(p => camelizeObjectKeys(p)))
       })
     }
 
@@ -70,7 +74,7 @@ module.exports = function (Post, Terms, TermRelationships, TermTaxonomy, setting
               result &&
               languagePosts.push(post))
         }, Promise.resolve())
-          .then(() => languagePosts)
+          .then(() => languagePosts.map(p => camelizeObjectKeys(p)))
       })
     }
 
@@ -80,7 +84,7 @@ module.exports = function (Post, Terms, TermRelationships, TermTaxonomy, setting
       // limit: limit,
       // offset: skip
     }).then(r => {
-      return r
+      return r.map(p => camelizeObjectKeys(p))
     })
   }
 }

@@ -66,15 +66,15 @@ describe('internationalisation', () => {
     apples = await getPosts(PostMock, null, null, TermTaxonomyMock, i18nEnabledSettings)({ postType: 'wp_apple', language: 'en' })
     expect(apples).toHaveLength(2)
     expect(apples).toContainEqual(
-      expect.objectContaining({ post_title: 'Granny Smith' })
+      expect.objectContaining({ postTitle: 'Granny Smith' })
     )
     expect(apples).toContainEqual(
-      expect.objectContaining({ post_title: 'Pink Lady' })
+      expect.objectContaining({ postTitle: 'Pink Lady' })
     )
     apples = await getPosts(PostMock, null, null, TermTaxonomyMock, i18nEnabledSettings)({ postType: 'wp_apple', language: 'da' })
     expect(apples).toHaveLength(1)
     expect(apples).toContainEqual(
-      expect.objectContaining({ post_title: 'Lyserød Dame' })
+      expect.objectContaining({ postTitle: 'Lyserød Dame' })
     )
   })
 
@@ -83,10 +83,10 @@ describe('internationalisation', () => {
     apples = await getPosts(PostMock, null, null, TermTaxonomyMock, i18nEnabledSettings)({ postType: 'wp_apple' })
     expect(apples).toHaveLength(2)
     expect(apples).toContainEqual(
-      expect.objectContaining({ post_title: 'Granny Smith' })
+      expect.objectContaining({ postTitle: 'Granny Smith' })
     )
     expect(apples).toContainEqual(
-      expect.objectContaining({ post_title: 'Pink Lady' })
+      expect.objectContaining({ postTitle: 'Pink Lady' })
     )
   })
 })

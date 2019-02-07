@@ -2,12 +2,12 @@
 const SequelizeMock = require('sequelize-mock')
 const { toMatchOneOf, toMatchShapeOf } = require('jest-to-match-shape-of')
 
-const applyHandlers = require('../utilities').applyHandlers
+const applyHandlers = require('../../utilities').applyHandlers
 
-const getCustomFields = require('../../graphql/modules/Post/connectors/getCustomFields')
+const getCustomFields = require('../../../graphql/modules/Post/connectors/getCustomFields')
 
-const samplePostmetaData = require('./sampleData2/Postmeta')
-const samplePostData = require('./sampleData2/Post')
+const samplePostmetaData = require('./testData/Postmeta')
+const samplePostData = require('./testData/Post')
 
 expect.extend({
   toMatchOneOf,

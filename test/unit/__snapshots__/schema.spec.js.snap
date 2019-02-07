@@ -8,7 +8,7 @@ const OtherInformation = require('../fieldGroups/OtherInformation')
 const Apple = \`
 type Apple {
   ID: Int
-  post_title: String
+  postTitle: String
   
   appleInformation: AppleInformation,
   otherInformation: OtherInformation

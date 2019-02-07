@@ -1,14 +1,14 @@
 /* global expect, describe, it, beforeEach */
 const SequelizeMock = require('sequelize-mock')
 
-const applyHandlers = require('../utilities').applyHandlers
+const applyHandlers = require('../../utilities').applyHandlers
 
-const getAppleInformationLocation = require('../../graphql/modules/CustomFields/connectors/getAppleInformationLocation')
-const getPosts = require('../../graphql/modules/Post/connectors/getPosts')
+const getAppleInformationLocation = require('../../../graphql/modules/CustomFields/connectors/getAppleInformationLocation')
+const getPosts = require('../../../graphql/modules/Post/connectors/getPosts')
 
-const samplePostmetaData = require('./sampleData1/Postmeta')
-const samplePostData = require('./sampleData1/Post')
-const sampleTermTaxonomyData = require('./sampleData1/TermTaxonomy')
+const samplePostmetaData = require('./testData/Postmeta')
+const samplePostData = require('./testData/Post')
+const sampleTermTaxonomyData = require('./testData/TermTaxonomy')
 
 describe('internationalisation', () => {
   let PostMock, PostmetaMock, TermTaxonomyMock

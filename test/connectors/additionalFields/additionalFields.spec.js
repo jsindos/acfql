@@ -1,12 +1,12 @@
 /* global expect, describe, it, beforeEach */
 const SequelizeMock = require('sequelize-mock')
 
-const applyHandlers = require('../utilities').applyHandlers
+const applyHandlers = require('../../utilities').applyHandlers
 
-const getFeaturedImage = require('../../graphql/modules/Post/connectors/getFeaturedImage')
+const getFeaturedImage = require('../../../graphql/modules/Post/connectors/getFeaturedImage')
 
-const samplePostmetaData = require('./sampleData3/Postmeta')
-const samplePostData = require('./sampleData3/Post')
+const samplePostmetaData = require('./testData/Postmeta')
+const samplePostData = require('./testData/Post')
 
 describe('internationalisation', () => {
   let PostMock, PostmetaMock

@@ -8,9 +8,9 @@ require.context = require('./requireContextPolyfill')
 
 const exec = util.promisify(require('child_process').exec)
 
-const main = async () => {
+const main = async (buildDirectory = './graphql') => {
   try {
-    const { stdout, stderr } = await exec(`npx rimraf graphql`)
+    const { stdout, stderr } = await exec(`npx rimraf ${buildDirectory}`)
     stdout && console.log(stdout)
     stderr && console.log(stderr)
   } catch (e) {
@@ -49,22 +49,22 @@ const main = async () => {
    * For each schema generation template file,
    * generate the template using the customPostTypes and fieldGroups found in the ACF JSON exports
    *
-   * Builds to the '/graphql' directory in the root of the project
+   * Builds `buildDirectory` directory, `./graphql` by default
    */
   await Promise.all(Object.entries(templates).map(async ([ templatePath, { generateTemplate } ]) => {
     const template = generateTemplate(store.customPostTypes, store.fieldGroups)
     if (Array.isArray(template)) {
       template.map(async t => {
-        const fileName = path.join(path.dirname(templatePath), `${t.fileName}.js`).replace(/src/, 'graphql')
+        const fileName = path.join(path.dirname(templatePath), `${t.fileName}.js`).replace(/src/, buildDirectory)
         await writeFile(fileName, t.template, (err) => err && console.log(err))
       })
     } else {
-      const fileName = templatePath.replace(/.template/, '').replace(/src/, 'graphql')
+      const fileName = templatePath.replace(/.template/, '').replace(/src/, buildDirectory)
       await writeFile(fileName, template, (err) => err && console.log(err))
     }
   }))
 
-  console.log('Your graphql schema has been generated in "./graphql".')
+  console.log(`Your graphql schema has been generated in "${buildDirectory}".`)
   process.exit()
 }
 

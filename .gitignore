@@ -1,5 +1,5 @@
 node_modules/
 graphql/
-acf-exports/
+/acf-exports/
 settings.js
 .DS_Store

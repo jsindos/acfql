@@ -1,3 +1,4 @@
+/* eslint-disable no-eval */
 /* global expect, describe, it */
 
 const path = require('path')
@@ -5,14 +6,12 @@ const path = require('path')
 const ACFStore = require('../../generate/acfstore')
 require.context = require('../../generate/requireContextPolyfill')
 
-describe('acfstore integration', () => {
-  it('hello', () => {
+describe('acfstore', () => {
+  it('throws SyntaxError due to naming duplication between fieldGroup and customPostType', () => {
     /**
      * Get a list of our schema generation template files, using a require.context polyfill
      */
     const templates = require.context(path.join(__dirname, '..', '..'), true, /(?!.*node_modules).*\.template\.js$/)
-
-    console.log(templates)
 
     /**
      * Create the ACFStore that will store the information from our ACF JSON exports
@@ -23,6 +22,7 @@ describe('acfstore integration', () => {
      * The directory containing our ACF JSON exports
      */
     const DIR = './test/acfstore/dummyData'
+
     /**
      * Parse the ACF JSON exports into the ACFStore
      */
@@ -30,11 +30,10 @@ describe('acfstore integration', () => {
 
     // console.log(JSON.stringify(store.fieldGroups, null, 2))
 
-    const fieldGroupTemplates = templates['src/schema/FieldGroup.template.js'].generateTemplate(store.customPostTypes, store.fieldGroups)
-    const customPostTypeTemplates = templates['src/schema/CustomPostType.template.js']
+    const customPostTypeTemplates = templates['src/schema/customPostTypes/CustomPostType.template.js']
       .generateTemplate(store.customPostTypes, store.fieldGroups)
 
-    console.log(fieldGroupTemplates)
-    console.log(customPostTypeTemplates)
+    // SyntaxError: Identifier 'TeamMember' has already been declared
+    expect(() => eval(customPostTypeTemplates[0].template)).toThrow()
   })
 })

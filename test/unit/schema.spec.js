@@ -2,8 +2,8 @@
 
 const ACFStore = require('../../generate/acfstore')
 const { generateTemplate: generateSchemaTemplate } = require('../../src/schema/schema.template.js')
-const { generateTemplate: generateCustomPostTypeTemplate } = require('../../src/schema/CustomPostType.template.js')
-const { generateTemplate: generateFieldGroupTemplate } = require('../../src/schema/FieldGroup.template.js')
+const { generateTemplate: generateCustomPostTypeTemplate } = require('../../src/schema/customPostTypes/CustomPostType.template.js')
+const { generateTemplate: generateFieldGroupTemplate } = require('../../src/schema/fieldGroups/FieldGroup.template.js')
 
 describe('generate schema files', () => {
   it('generateSchemaTemplate', () => {

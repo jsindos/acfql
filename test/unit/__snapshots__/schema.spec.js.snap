@@ -1,8 +1,8 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`generate schema files generateCustomPostTypeTemplate 1`] = `
-"const AppleInformation = require('./AppleInformation')
-const OtherInformation = require('./OtherInformation')
+"const AppleInformation = require('../fieldGroups/AppleInformation')
+const OtherInformation = require('../fieldGroups/OtherInformation')
 
 
 const Apple = \`

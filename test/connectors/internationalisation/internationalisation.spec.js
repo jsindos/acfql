@@ -3,8 +3,8 @@ const SequelizeMock = require('sequelize-mock')
 
 const applyHandlers = require('../../utilities').applyHandlers
 
-const getAppleInformationLocation = require('../../../graphql/modules/CustomFields/connectors/getAppleInformationLocation')
-const getPosts = require('../../../graphql/modules/Post/connectors/getPosts')
+const getAppleInformationLocation = require('./graphql/modules/CustomFields/connectors/getAppleInformationLocation')
+const getPosts = require('./graphql/modules/Post/connectors/getPosts')
 
 const samplePostmetaData = require('./testData/Postmeta')
 const samplePostData = require('./testData/Post')

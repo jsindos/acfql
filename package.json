@@ -8,7 +8,7 @@
     "import": "node -e \"require('./import')()\"",
     "defaults": "node -e \"require('./defaults')()\"",
     "test": "NODE_ENV=test BABEL_DISABLE_CACHE=1 node --trace-warnings -r babel-register ./test/RunTests.js",
-    "test-watch": "npm test -- --watch",
+    "test-watch": "npm run generate-test-schemas && npm test -- --watch",
     "generate-test-schemas": "node test/generateTestSchemas.js",
     "server": "nodemon runServer.js"
   },

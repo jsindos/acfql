@@ -8,7 +8,7 @@ require.context = require('./requireContextPolyfill')
 
 const exec = util.promisify(require('child_process').exec)
 
-const main = async (buildDirectory = './graphql') => {
+const main = async (buildDirectory = './graphql', acfExportsDirectory = './acf-exports') => {
   try {
     const { stdout, stderr } = await exec(`npx rimraf ${buildDirectory}`)
     stdout && console.log(stdout)
@@ -28,12 +28,7 @@ const main = async (buildDirectory = './graphql') => {
    */
   const store = new ACFStore()
 
-  /**
-   * The directory containing our ACF JSON exports
-   */
-  const DIR = './acf-exports'
-
-  if (!fs.existsSync(path.join(process.cwd(), DIR))) {
+  if (!fs.existsSync(path.join(process.cwd(), acfExportsDirectory))) {
     console.log('Please export your WordPress ACF fields to ./acf-exports using the advanced-custom-fields-wpcli tool (https://github.com/hoppinger/advanced-custom-fields-wpcli).')
     process.exit()
   }
@@ -41,7 +36,7 @@ const main = async (buildDirectory = './graphql') => {
   /**
    * Parse the ACF JSON exports into the ACFStore
    */
-  store.parse(DIR)
+  store.parse(acfExportsDirectory)
 
   // console.log(JSON.stringify(store.fieldGroups, null, 2))
 

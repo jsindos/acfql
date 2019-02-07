@@ -50,7 +50,6 @@ describe('dummyTest', () => {
 
   it('', async () => {
     const customFields = await getCustomFields(PostMock, PostmetaMock)({ postId: 8 })
-    // Retrieves fields that have the same name under different field groups
     console.log(customFields.services.serviceItem)
   })
 })

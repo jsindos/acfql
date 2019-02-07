@@ -60,7 +60,6 @@ const main = async (buildDirectory = './graphql', acfExportsDirectory = './acf-e
   }))
 
   console.log(`Your graphql schema has been generated in "${buildDirectory}".`)
-  process.exit()
 }
 
 module.exports = main

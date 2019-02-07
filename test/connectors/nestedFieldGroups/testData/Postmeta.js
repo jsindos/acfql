@@ -40,13 +40,13 @@ module.exports = {
     {
       'meta_id': 83,
       'post_id': 40,
-      'meta_key': 'orange_information_locale',
+      'meta_key': 'orange_information_location',
       'meta_value': 'Orange'
     },
     {
       'meta_id': 84,
       'post_id': 40,
-      'meta_key': '_orange_information_locale',
+      'meta_key': '_orange_information_location',
       'meta_value': 'field_5ba9ed7c84abd'
     },
     {

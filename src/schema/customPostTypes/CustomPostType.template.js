@@ -14,6 +14,7 @@ const ${customPostType.fullCaseName} = \`
 type ${customPostType.fullCaseName} {
   ID: Int
   postTitle: String
+  postType: String
   ${customPostType.fieldGroups.map(g =>
   `
   ${g}: ${g.charAt(0).toUpperCase() + g.slice(1)}`

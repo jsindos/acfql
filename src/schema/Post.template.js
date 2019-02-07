@@ -11,6 +11,7 @@ module.exports.generateTemplate = () =>
     postName: String
     guid: String
     postExcerpt: String
+    postType: String
   }
 \`
 

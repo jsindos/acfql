@@ -4,6 +4,7 @@ const SequelizeMock = require('sequelize-mock')
 const applyHandlers = require('../../utilities').applyHandlers
 
 const getFeaturedImage = require('./graphql/modules/Post/connectors/getFeaturedImage')
+const getPost = require('./graphql/modules/Post/connectors/getPost')
 
 const samplePostmetaData = require('./testData/Postmeta')
 const samplePostData = require('./testData/Post')
@@ -45,5 +46,10 @@ describe('internationalisation', () => {
   it('retrieves featured image', async () => {
     const featuredImage = await getFeaturedImage(PostMock, PostmetaMock)({ postId: 69 })
     expect(featuredImage).toEqual('http://testpress.localhost/wp-content/uploads/2019/01/Emma-Watson-Wallpapers-sayou-30461666-1600-1200.jpg')
+  })
+
+  it('retrieves post type', async () => {
+    const post = await getPost(PostMock, PostmetaMock)({ postId: 69 })
+    expect(post.postType).toEqual('post')
   })
 })

@@ -1,3 +1,5 @@
+/* eslint-disable indent */
+
 const generateTemplates = (customPostTypes, fieldGroups) => {
   return fieldGroups.map(fieldGroup => {
     return {
@@ -17,6 +19,5 @@ module.exports = () => [ ${fieldGroup.fullCaseName} ]
     }
   })
 }
-  
+
 module.exports.generateTemplate = generateTemplates
-  

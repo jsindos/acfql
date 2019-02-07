@@ -1,8 +1,8 @@
 /* eslint-disable indent */
 
-function generateTemplate (customPostTypes, fieldGroups) {
-  return `${customPostTypes.map(c =>
-`const ${c.fullCaseName} = require('./${c.fullCaseName}')
+module.exports.generateTemplate = (customPostTypes, fieldGroups) => `\
+${customPostTypes.map(c =>
+`const ${c.fullCaseName} = require('./customPostTypes/${c.fullCaseName}')
 `
 ).join('')}
 const Post = require('./Post')
@@ -37,6 +37,3 @@ module.exports = [
   SchemaDefinition
 ]
 `
-}
-
-module.exports.generateTemplate = generateTemplate

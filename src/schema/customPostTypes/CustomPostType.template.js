@@ -1,11 +1,12 @@
 /* eslint-disable indent */
 
-const generateTemplates = (customPostTypes, fieldGroups) => {
+module.exports.generateTemplate = (customPostTypes, fieldGroups) => {
   return customPostTypes.map(customPostType => {
     return {
       fileName: customPostType.fullCaseName,
-      template: `${customPostType.fieldGroups.map(g =>
-`const ${g.charAt(0).toUpperCase() + g.slice(1)} = require('./${g.charAt(0).toUpperCase() + g.slice(1)}')
+      template: `\
+${customPostType.fieldGroups.map(g =>
+`const ${g.charAt(0).toUpperCase() + g.slice(1)} = require('../fieldGroups/${g.charAt(0).toUpperCase() + g.slice(1)}')
 `
       ).join('')}
 
@@ -26,5 +27,3 @@ module.exports = () => [ ${customPostType.fullCaseName}, ${customPostType.fieldG
     }
   })
 }
-
-module.exports.generateTemplate = generateTemplates

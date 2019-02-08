@@ -1,0 +1,55 @@
+[
+    {
+        "ID": false,
+        "key": "group_5b780c9339b9e",
+        "title": "Sponsor Information",
+        "fields": [
+            {
+                "key": "field_5b780c9ca08a0",
+                "label": "Sponsor Category",
+                "name": "sponsor_category",
+                "type": "select",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "choices": {
+                    "Titanium": "Titanium",
+                    "Platinum": "Platinum",
+                    "Gold": "Gold",
+                    "Silver": "Silver"
+                },
+                "default_value": [],
+                "allow_null": 0,
+                "multiple": 0,
+                "ui": 0,
+                "ajax": 0,
+                "return_format": "value",
+                "placeholder": ""
+            }
+        ],
+        "location": [
+            [
+                {
+                    "param": "post_type",
+                    "operator": "==",
+                    "value": "wp_sponsor"
+                }
+            ]
+        ],
+        "menu_order": 0,
+        "position": "normal",
+        "style": "default",
+        "label_placement": "top",
+        "instruction_placement": "label",
+        "hide_on_screen": "",
+        "active": 1,
+        "description": "",
+        "_valid": 1,
+        "local": "php"
+    }
+]

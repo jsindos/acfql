@@ -1,0 +1,126 @@
+[
+    {
+        "ID": false,
+        "key": "group_5b248083202b7",
+        "title": "Landing Page Information",
+        "fields": [
+            {
+                "key": "field_5b24808902c13",
+                "label": "About Page Blurb",
+                "name": "about_page_blurb",
+                "type": "textarea",
+                "instructions": "This text appears on the landing page reading as an introduction to the Mix Festival",
+                "required": 1,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "",
+                "placeholder": "",
+                "maxlength": "",
+                "rows": "",
+                "new_lines": ""
+            },
+            {
+                "key": "field_5b2481705968d",
+                "label": "Mix Program Download",
+                "name": "mix_program_download",
+                "type": "file",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "return_format": "url",
+                "library": "all",
+                "min_size": "",
+                "max_size": "",
+                "mime_types": ""
+            },
+            {
+                "key": "field_5b2481b85968e",
+                "label": "Mix Program Blurb",
+                "name": "mix_program_blurb",
+                "type": "textarea",
+                "instructions": "This text appears on the landing page as a blurb about the Mix Program",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "",
+                "placeholder": "",
+                "maxlength": "",
+                "rows": "",
+                "new_lines": ""
+            },
+            {
+                "key": "field_5b24824d5968f",
+                "label": "Mix Program Image",
+                "name": "mix_program_image",
+                "type": "image",
+                "instructions": "This image appears on the landing page to represent the Mix Program",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "return_format": "url",
+                "preview_size": "medium",
+                "library": "all",
+                "min_width": "",
+                "min_height": "",
+                "min_size": "",
+                "max_width": "",
+                "max_height": "",
+                "max_size": "",
+                "mime_types": ""
+            },
+            {
+                "key": "field_5b37154aa775b",
+                "label": "Dummy Location",
+                "name": "dummy_location",
+                "type": "google_map",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "center_lat": "",
+                "center_lng": "",
+                "zoom": "",
+                "height": ""
+            }
+        ],
+        "location": [
+            [
+                {
+                    "param": "post_type",
+                    "operator": "==",
+                    "value": "wp_landing_page"
+                }
+            ]
+        ],
+        "menu_order": 0,
+        "position": "normal",
+        "style": "default",
+        "label_placement": "top",
+        "instruction_placement": "label",
+        "hide_on_screen": "",
+        "active": 1,
+        "description": "",
+        "_valid": 1
+    }
+]

@@ -1,0 +1,138 @@
+[
+    {
+        "ID": false,
+        "key": "group_5b1905b89d2dd",
+        "title": "Film Information",
+        "fields": [
+            {
+                "key": "field_5b1905c11c187",
+                "label": "Director",
+                "name": "director",
+                "type": "text",
+                "instructions": "The director of the film",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "",
+                "placeholder": "",
+                "prepend": "",
+                "append": "",
+                "maxlength": ""
+            },
+            {
+                "key": "field_5b1905d11c188",
+                "label": "Year",
+                "name": "year",
+                "type": "text",
+                "instructions": "The year the film was made",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "",
+                "placeholder": "",
+                "prepend": "",
+                "append": "",
+                "maxlength": ""
+            },
+            {
+                "key": "field_5b1906061c189",
+                "label": "Language",
+                "name": "language",
+                "type": "text",
+                "instructions": "The language of the film",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "",
+                "placeholder": "",
+                "prepend": "",
+                "append": "",
+                "maxlength": ""
+            },
+            {
+                "key": "field_5b1906171c18a",
+                "label": "Subtitles",
+                "name": "subtitles",
+                "type": "text",
+                "instructions": "If there are any subtitles for the film. Defaults to 'No subtitles'.",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "No subtitles",
+                "placeholder": "",
+                "prepend": "",
+                "append": "",
+                "maxlength": ""
+            },
+            {
+                "key": "field_5b1fb5988fcc9",
+                "label": "Length",
+                "name": "length",
+                "type": "text",
+                "instructions": "The length of the film in minutes",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "",
+                "placeholder": "For example, 120",
+                "prepend": "",
+                "append": "",
+                "maxlength": ""
+            },
+            {
+                "key": "field_5b252b97fd8fb",
+                "label": "Trailer",
+                "name": "trailer",
+                "type": "url",
+                "instructions": "The trailer URL",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "",
+                "placeholder": ""
+            }
+        ],
+        "location": [
+            [
+                {
+                    "param": "post_type",
+                    "operator": "==",
+                    "value": "wp_screening"
+                }
+            ]
+        ],
+        "menu_order": 0,
+        "position": "acf_after_title",
+        "style": "default",
+        "label_placement": "top",
+        "instruction_placement": "label",
+        "hide_on_screen": "",
+        "active": 1,
+        "description": "",
+        "_valid": 1
+    }
+]

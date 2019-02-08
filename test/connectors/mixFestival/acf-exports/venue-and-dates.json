@@ -1,0 +1,190 @@
+[
+    {
+        "ID": false,
+        "key": "group_5b0d38fd17c36",
+        "title": "Venue and Dates",
+        "fields": [
+            {
+                "key": "field_5b0d3968eebb7",
+                "label": "Venue and Dates",
+                "name": "venue_and_dates",
+                "type": "repeater",
+                "instructions": "The venue and dates of your event or screening",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "collapsed": "",
+                "min": 0,
+                "max": 0,
+                "layout": "table",
+                "button_label": "",
+                "sub_fields": [
+                    {
+                        "key": "field_5b0d3a27eebb8",
+                        "label": "Start time",
+                        "name": "start_time",
+                        "type": "date_time_picker",
+                        "instructions": "",
+                        "required": 1,
+                        "conditional_logic": 0,
+                        "wrapper": {
+                            "width": "",
+                            "class": "",
+                            "id": ""
+                        },
+                        "display_format": "d\/m\/Y g:i a",
+                        "return_format": "d\/m\/Y g:i a",
+                        "first_day": 1
+                    },
+                    {
+                        "key": "field_5b0d3a91eebb9",
+                        "label": "End time",
+                        "name": "end_time",
+                        "type": "date_time_picker",
+                        "instructions": "",
+                        "required": 0,
+                        "conditional_logic": 0,
+                        "wrapper": {
+                            "width": "",
+                            "class": "",
+                            "id": ""
+                        },
+                        "display_format": "d\/m\/Y g:i a",
+                        "return_format": "d\/m\/Y g:i a",
+                        "first_day": 1
+                    },
+                    {
+                        "key": "field_5b0d3aaceebba",
+                        "label": "Venue",
+                        "name": "venue",
+                        "type": "textarea",
+                        "instructions": "",
+                        "required": 1,
+                        "conditional_logic": 0,
+                        "wrapper": {
+                            "width": "",
+                            "class": "",
+                            "id": ""
+                        },
+                        "default_value": "",
+                        "placeholder": "",
+                        "maxlength": "",
+                        "rows": "",
+                        "new_lines": ""
+                    },
+                    {
+                        "key": "field_5b0d3b52eebbb",
+                        "label": "Tickets status",
+                        "name": "tickets_status",
+                        "type": "radio",
+                        "instructions": "",
+                        "required": 0,
+                        "conditional_logic": 0,
+                        "wrapper": {
+                            "width": "",
+                            "class": "",
+                            "id": ""
+                        },
+                        "choices": {
+                            "On sale": "On sale",
+                            "Sold out": "Sold out"
+                        },
+                        "allow_null": 0,
+                        "other_choice": 1,
+                        "save_other_choice": 0,
+                        "default_value": "On sale",
+                        "layout": "vertical",
+                        "return_format": "value"
+                    },
+                    {
+                        "key": "field_5b0d3baaeebbc",
+                        "label": "Tickets URL",
+                        "name": "tickets_url",
+                        "type": "textarea",
+                        "instructions": "",
+                        "required": 0,
+                        "conditional_logic": 0,
+                        "wrapper": {
+                            "width": "",
+                            "class": "",
+                            "id": ""
+                        },
+                        "default_value": "",
+                        "placeholder": "",
+                        "maxlength": "",
+                        "rows": "",
+                        "new_lines": ""
+                    },
+                    {
+                        "key": "field_5b0d3bd2eebbd",
+                        "label": "Prices",
+                        "name": "prices",
+                        "type": "textarea",
+                        "instructions": "Place extra prices on a new line.",
+                        "required": 0,
+                        "conditional_logic": 0,
+                        "wrapper": {
+                            "width": "",
+                            "class": "",
+                            "id": ""
+                        },
+                        "default_value": "",
+                        "placeholder": "",
+                        "maxlength": "",
+                        "rows": "",
+                        "new_lines": ""
+                    },
+                    {
+                        "key": "field_5b20c498b3956",
+                        "label": "Featured?",
+                        "name": "featured",
+                        "type": "true_false",
+                        "instructions": "If selected, the date will be displayed as a featured film date or event date on the home screen",
+                        "required": 0,
+                        "conditional_logic": 0,
+                        "wrapper": {
+                            "width": "",
+                            "class": "",
+                            "id": ""
+                        },
+                        "message": "",
+                        "default_value": 0,
+                        "ui": 0,
+                        "ui_on_text": "",
+                        "ui_off_text": ""
+                    }
+                ]
+            }
+        ],
+        "location": [
+            [
+                {
+                    "param": "post_type",
+                    "operator": "==",
+                    "value": "wp_screening"
+                }
+            ],
+            [
+                {
+                    "param": "post_type",
+                    "operator": "==",
+                    "value": "wp_event"
+                }
+            ]
+        ],
+        "menu_order": 0,
+        "position": "acf_after_title",
+        "style": "default",
+        "label_placement": "top",
+        "instruction_placement": "label",
+        "hide_on_screen": "",
+        "active": 1,
+        "description": "",
+        "_valid": 1,
+        "local": "php"
+    }
+]

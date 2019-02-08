@@ -1,0 +1,62 @@
+[
+    {
+        "ID": false,
+        "key": "group_5b2515b64cdd2",
+        "title": "Archive Information",
+        "fields": [
+            {
+                "key": "field_5b2515bafa6c3",
+                "label": "Link",
+                "name": "link",
+                "type": "url",
+                "instructions": "The link to the archived program",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "",
+                "placeholder": ""
+            },
+            {
+                "key": "field_5b2515d2fa6c4",
+                "label": "Archive Year",
+                "name": "archive_year",
+                "type": "text",
+                "instructions": "The year of the archived program",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "",
+                "placeholder": "",
+                "prepend": "",
+                "append": "",
+                "maxlength": ""
+            }
+        ],
+        "location": [
+            [
+                {
+                    "param": "post_type",
+                    "operator": "==",
+                    "value": "wp_archive"
+                }
+            ]
+        ],
+        "menu_order": 0,
+        "position": "acf_after_title",
+        "style": "default",
+        "label_placement": "top",
+        "instruction_placement": "label",
+        "hide_on_screen": "",
+        "active": 1,
+        "description": "",
+        "_valid": 1
+    }
+]

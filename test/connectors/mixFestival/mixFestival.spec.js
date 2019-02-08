@@ -3,10 +3,12 @@ const SequelizeMock = require('sequelize-mock')
 
 const applyHandlers = require('../../utilities').applyHandlers
 
+const getFeaturedImage = require('./graphql/modules/Post/connectors/getFeaturedImage')
+
 const samplePostmetaData = require('./testData/Postmeta')
 const samplePostData = require('./testData/Post')
 
-describe('internationalisation', () => {
+describe('mixFestival', () => {
   let PostMock, PostmetaMock
   beforeEach(async () => {
     const DBConnectionMock = new SequelizeMock()
@@ -41,5 +43,8 @@ describe('internationalisation', () => {
   })
 
   it('thumbnail retrieved by custom post types', async () => {
+    // This is the id of a screening
+    const screeningFeaturedImage = await getFeaturedImage(PostMock, PostmetaMock)({ postId: 691 })
+    expect(screeningFeaturedImage.src).toEqual('http://mix.backend.test/wp-content/uploads/2018/09/MV5BZmU2MjllMWYtZDA3MS00YjJjLWE3MDQtM2RlMzViZGUyMzhkXkEyXkFqcGdeQXVyMjQ3NzUxOTM@._V1_.jpg')
   })
 })

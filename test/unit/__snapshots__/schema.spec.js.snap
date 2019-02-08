@@ -4,6 +4,7 @@ exports[`generate schema files generateCustomPostTypeTemplate 1`] = `
 "const AppleInformation = require('../fieldGroups/AppleInformation')
 const OtherInformation = require('../fieldGroups/OtherInformation')
 
+const Image = require('../Image')
 
 const Apple = \`
 type Apple {
@@ -11,13 +12,14 @@ type Apple {
   postTitle: String
   postType: String
   postContent: String
+  featuredImage: Image
   
   appleInformation: AppleInformation,
   otherInformation: OtherInformation
 }
 \`
 
-module.exports = () => [ Apple, AppleInformation, OtherInformation ]
+module.exports = () => [ Apple, Image, AppleInformation, OtherInformation ]
 "
 `;
 

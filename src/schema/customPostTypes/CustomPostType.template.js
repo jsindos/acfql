@@ -9,6 +9,7 @@ ${customPostType.fieldGroups.map(g =>
 `const ${g.charAt(0).toUpperCase() + g.slice(1)} = require('../fieldGroups/${g.charAt(0).toUpperCase() + g.slice(1)}')
 `
       ).join('')}
+const Image = require('../Image')
 
 const ${customPostType.fullCaseName} = \`
 type ${customPostType.fullCaseName} {
@@ -16,6 +17,7 @@ type ${customPostType.fullCaseName} {
   postTitle: String
   postType: String
   postContent: String
+  featuredImage: Image
   ${customPostType.fieldGroups.map(g =>
   `
   ${g}: ${g.charAt(0).toUpperCase() + g.slice(1)}`
@@ -23,7 +25,7 @@ type ${customPostType.fullCaseName} {
 }
 \`
 
-module.exports = () => [ ${customPostType.fullCaseName}, ${customPostType.fieldGroups
+module.exports = () => [ ${customPostType.fullCaseName}, Image, ${customPostType.fieldGroups
   .map((g, i) => `${g.charAt(0).toUpperCase() + g.slice(1)}${i !== (customPostType.fieldGroups.length - 1) ? ', ' : ''}`).join('')} ]
 `
     }

@@ -31,9 +31,11 @@ module.exports.generateTemplate = (customPostTypes, fieldGroups) =>
       }
     },
     
-    ${customPostTypes.map(c =>
-    `
+    ${customPostTypes.map(c => `\
     ${c.fullCaseName}: {
+      featuredImage (post) {
+        return Connectors.getFeaturedImage({ postId: post.ID })
+      },
       ${c.fieldGroups.map(f =>
       `
       ${f} (post) {

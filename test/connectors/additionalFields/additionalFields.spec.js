@@ -45,7 +45,7 @@ describe('internationalisation', () => {
 
   it('retrieves featured image', async () => {
     const featuredImage = await getFeaturedImage(PostMock, PostmetaMock)({ postId: 69 })
-    expect(featuredImage).toEqual('http://testpress.localhost/wp-content/uploads/2019/01/Emma-Watson-Wallpapers-sayou-30461666-1600-1200.jpg')
+    expect(featuredImage.src).toEqual('http://testpress.localhost/wp-content/uploads/2019/01/Emma-Watson-Wallpapers-sayou-30461666-1600-1200.jpg')
   })
 
   it('retrieves post type', async () => {

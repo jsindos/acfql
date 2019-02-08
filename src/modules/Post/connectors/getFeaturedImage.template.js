@@ -15,7 +15,9 @@ module.exports = function (Post, Postmeta) {
             ID: Number(res.meta_value)
           }
         }).then(post => {
-          return post.guid
+          return {
+            src: post.guid
+          }
         })
       }
       return null

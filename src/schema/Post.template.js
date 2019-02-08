@@ -1,13 +1,15 @@
 /* eslint-disable indent */
 
-module.exports.generateTemplate = () =>
-`const Post = \`
+module.exports.generateTemplate = () => `\
+const Image = require('./Image')
+
+const Post = \`
   type Post {
     ID: Int
     postTitle: String
     postContent: String
     customFields: JSON
-    featuredImage: String
+    featuredImage: Image
     postName: String
     guid: String
     postExcerpt: String
@@ -15,5 +17,5 @@ module.exports.generateTemplate = () =>
   }
 \`
 
-module.exports = () => [Post]
+module.exports = () => [Post, Image]
 `

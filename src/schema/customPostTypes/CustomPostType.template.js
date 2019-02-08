@@ -15,6 +15,7 @@ type ${customPostType.fullCaseName} {
   ID: Int
   postTitle: String
   postType: String
+  postContent: String
   ${customPostType.fieldGroups.map(g =>
   `
   ${g}: ${g.charAt(0).toUpperCase() + g.slice(1)}`

@@ -9,6 +9,8 @@ const Apple = \`
 type Apple {
   ID: Int
   postTitle: String
+  postType: String
+  postContent: String
   
   appleInformation: AppleInformation,
   otherInformation: OtherInformation

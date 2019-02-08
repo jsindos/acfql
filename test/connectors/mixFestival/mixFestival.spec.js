@@ -4,6 +4,9 @@ const SequelizeMock = require('sequelize-mock')
 const applyHandlers = require('../../utilities').applyHandlers
 
 const getFeaturedImage = require('./graphql/modules/Post/connectors/getFeaturedImage')
+const getLandingPageInformationMixProgramImage = require('./graphql/modules/CustomFields/connectors/getLandingPageInformationMixProgramImage')
+const getLandingPageInformationMixProgramDownload = require('./graphql/modules/CustomFields/connectors/getLandingPageInformationMixProgramDownload')
+const getAboutPageImagesImages = require('./graphql/modules/CustomFields/connectors/getAboutPageImagesImages')
 
 const samplePostmetaData = require('./testData/Postmeta')
 const samplePostData = require('./testData/Post')
@@ -47,4 +50,39 @@ describe('mixFestival', () => {
     const screeningFeaturedImage = await getFeaturedImage(PostMock, PostmetaMock)({ postId: 691 })
     expect(screeningFeaturedImage.src).toEqual('http://mix.backend.test/wp-content/uploads/2018/09/MV5BZmU2MjllMWYtZDA3MS00YjJjLWE3MDQtM2RlMzViZGUyMzhkXkEyXkFqcGdeQXVyMjQ3NzUxOTM@._V1_.jpg')
   })
+
+  // Questionable functionality
+  it('retrieves image custom fields from `en` post', async () => {
+    // postId 493 for `da` landing page
+    const image = await getLandingPageInformationMixProgramImage(PostMock, PostmetaMock)({ postId: 493 })
+    expect(image).toEqual('http://mix.backend.test/wp-content/uploads/2018/06/MIX18_program_240x170_opslag_lowres_PRINT-1.jpg')
+  })
+
+  it('retrieves file custom fields from `en` post', async () => {
+    // postId 493 for `da` landing page
+    const file = await getLandingPageInformationMixProgramDownload(PostMock, PostmetaMock)({ postId: 493 })
+    expect(file).toEqual('http://mix.backend.test/wp-content/uploads/2018/06/MIX18_program_240x170_opslag_lowres_PRINT-1.pdf')
+  })
+
+  it('retrieves image repeater custom fields from `en` post', async () => {
+    // postId 490 for `da` about page with repeater images on `en` translation page
+    const images = await getAboutPageImagesImages(PostMock, PostmetaMock)({ postId: 490 })
+    expect(images).toHaveLength(5)
+    expect(images).toContainEqual(
+      expect.objectContaining({ image: 'http://mix.backend.test/wp-content/uploads/2018/06/c7.jpeg' })
+    )
+    expect(images).toContainEqual(
+      expect.objectContaining({ image: 'http://mix.backend.test/wp-content/uploads/2018/06/c21.jpeg' })
+    )
+    expect(images).toContainEqual(
+      expect.objectContaining({ image: 'http://mix.backend.test/wp-content/uploads/2018/09/MV5BNjc0OTA5ZjktZDM0NC00YTEwLTg5MGUtYjlhOTBjZjc5Mzc4XkEyXkFqcGdeQXVyNTYxMzIxNDM@._V1_.jpg' })
+    )
+    expect(images).toContainEqual(
+      expect.objectContaining({ image: 'http://mix.backend.test/wp-content/uploads/2018/09/MV5BZmU2MjllMWYtZDA3MS00YjJjLWE3MDQtM2RlMzViZGUyMzhkXkEyXkFqcGdeQXVyMjQ3NzUxOTM@._V1_SY1000_SX750_AL_.jpg' })
+    )
+    expect(images).toContainEqual(
+      expect.objectContaining({ image: 'http://mix.backend.test/wp-content/uploads/2018/06/Pre-Drink_Key_Art.jpg.0x600_q85.jpg' })
+    )
+  })
 })
+

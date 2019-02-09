@@ -90,14 +90,21 @@ module.exports = function (Post, Terms, TermRelationships, TermTaxonomy, setting
                     const match = result.description.match(new RegExp(String.raw\`"\${l}";i:(\\d+)\`))
                     return match ? { ...accum, [l]: match[1] } : accum
                   }, {})
-
-                // This may need to be changed to .dataValues for production
-                post.additionalFields = {
+                
+                const additionalFields = {
                   lang: {
                     selectedLanguage,
                     otherLanguageIds
                   }
                 }
+
+                // Differences between a testing environment and production environment with sequelize
+                if (post.dataValues) {
+                  post.dataValues.additionalFields = additionalFields
+                } else {
+                  post.additionalFields = additionalFields
+                }
+                
                 languagePosts.push(post)
               }
             })

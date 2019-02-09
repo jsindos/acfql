@@ -61,7 +61,7 @@ describe('mixFestival', () => {
   })
 
   // Questionable functionality
-  it.only('getPosts retrieves image custom fields from `en` post', async () => {
+  it.only('getPosts and custom field resolvers retrieves image custom fields from default language post', async () => {
     // There is only one Danish landing page
     const danishLandingPage = (await getPosts(PostMock, null, null, TermTaxonomyMock, i18nEnabledSettings)({ postType: 'wp_landing_page', language: 'da' }))[0]
     const image = await getLandingPageInformationMixProgramImage(PostMock, PostmetaMock, i18nEnabledSettings)({

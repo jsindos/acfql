@@ -82,9 +82,15 @@ module.exports = function (Post, Terms, TermRelationships, TermTaxonomy, setting
                     allLanguages.push(matches[1])
                   }
                 }
+
                 const otherLanguageIds = allLanguages
                   .filter(l => l !== selectedLanguage)
-                  .reduce((accum, l) => ({ ...accum, [l]: result.description.match(new RegExp(String.raw\`"\${l}"; i: (\\d +)\`))[1] }), {})
+                  .reduce((accum, l) => {
+                    // Some posts don't have all languages
+                    const match = result.description.match(new RegExp(String.raw\`"\${l}";i:(\\d+)\`))
+                    return match ? { ...accum, [l]: match[1] } : accum
+                  }, {})
+
                 // This may need to be changed to .dataValues for production
                 post.additionalFields = {
                   lang: {

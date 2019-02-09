@@ -12,13 +12,13 @@ module.exports = (Post, Postmeta, settings) => {
     return Postmeta.findOne({
       where: {
         meta_key: '${field.fieldName}',
-        post_id: postId
+        post_id: Number(postId)
       }
     }).then(postMeta => {
       if (!postMeta) return null
       return Post.findOne({
         where: {
-          id: Number(postMeta.meta_value)
+          ID: Number(postMeta.meta_value)
         }
       }).then(post => {
         return post && post.guid

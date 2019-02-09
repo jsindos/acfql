@@ -25,12 +25,12 @@ const getAppleInformationPrice = require('./getAppleInformationPrice')
 const getOtherInformationOther = require('./getOtherInformationOther')
 
 
-function Connectors ({ Post, Postmeta }) {
+function Connectors ({ Post, Postmeta }, settings) {
   return {
     
-    getAppleInformationCultivar: getAppleInformationCultivar(Post, Postmeta),
-    getAppleInformationPrice: getAppleInformationPrice(Post, Postmeta),
-    getOtherInformationOther: getOtherInformationOther(Post, Postmeta)
+    getAppleInformationCultivar: getAppleInformationCultivar(Post, Postmeta, settings),
+    getAppleInformationPrice: getAppleInformationPrice(Post, Postmeta, settings),
+    getOtherInformationOther: getOtherInformationOther(Post, Postmeta, settings)
   }
 }
 

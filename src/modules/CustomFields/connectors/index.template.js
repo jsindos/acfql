@@ -8,12 +8,12 @@ ${g.fields.map(f =>
 `).join('')}
 `
 ).join('')}
-function Connectors ({ Post, Postmeta }) {
+function Connectors ({ Post, Postmeta }, settings) {
   return {
     ${fieldGroups.map(g =>
     g.fields.map(f =>
     `
-    ${f.connectorName}: ${f.connectorName}(Post, Postmeta)`
+    ${f.connectorName}: ${f.connectorName}(Post, Postmeta, settings)`
     )
     )}
   }

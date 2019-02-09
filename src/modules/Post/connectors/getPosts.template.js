@@ -58,21 +58,43 @@ module.exports = function (Post, Terms, TermRelationships, TermTaxonomy, setting
       return Post.findAll({
         where: where
       }).then(posts => {
+        const selectedLanguage = language || settings.privateSettings.defaultLanguage
         let languagePosts = []
+        let allLanguages = []
         return posts.reduce((promise, post) => {
           return promise
             .then(result => {
               return TermTaxonomy.findOne({
                 where: {
                   description: {
-                    [Op.like]: \`%"$\{language || settings.privateSettings.defaultLanguage}";i:$\{post.ID}%\`
+                    [Op.like]: \`%"$\{selectedLanguage}";i:$\{post.ID}%\`
                   },
                   taxonomy: 'post_translations'
                 }
               })
-            }).then(result =>
-              result &&
-              languagePosts.push(post))
+            }).then(result => {
+              if (result) {
+                // Parse out all of the languages, only do this once
+                if (!allLanguages.length) {
+                  let matches
+                  const regex = /"([A-Za-z]+)"/g
+                  while (matches = regex.exec(result.description)) {
+                    allLanguages.push(matches[1])
+                  }
+                }
+                const otherLanguageIds = allLanguages
+                  .filter(l => l !== selectedLanguage)
+                  .reduce((accum, l) => ({ ...accum, [l]: result.description.match(new RegExp(String.raw\`"\${l}"; i: (\\d +)\`))[1] }), {})
+                // This may need to be changed to .dataValues for production
+                post.additionalFields = {
+                  lang: {
+                    selectedLanguage,
+                    otherLanguageIds
+                  }
+                }
+                languagePosts.push(post)
+              }
+            })
         }, Promise.resolve())
           .then(() => languagePosts.map(p => camelizeObjectKeys(p)))
       })

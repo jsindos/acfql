@@ -4,16 +4,18 @@ const SequelizeMock = require('sequelize-mock')
 const applyHandlers = require('../../utilities').applyHandlers
 
 const getFeaturedImage = require('./graphql/modules/Post/connectors/getFeaturedImage')
-// require('./graphql/modules/Post/connectors/getPosts')
+const getPosts = require('./graphql/modules/Post/connectors/getPosts')
 const getLandingPageInformationMixProgramImage = require('./graphql/modules/CustomFields/connectors/getLandingPageInformationMixProgramImage')
 const getLandingPageInformationMixProgramDownload = require('./graphql/modules/CustomFields/connectors/getLandingPageInformationMixProgramDownload')
 const getAboutPageImagesImages = require('./graphql/modules/CustomFields/connectors/getAboutPageImagesImages')
 
 const samplePostmetaData = require('./testData/Postmeta')
 const samplePostData = require('./testData/Post')
+const sampleTermTaxonomyData = require('./testData/TermTaxonomy')
 
 describe('mixFestival', () => {
-  let PostMock, PostmetaMock
+  let PostMock, PostmetaMock, TermTaxonomyMock
+  const i18nEnabledSettings = { privateSettings: { languageEnabled: true, defaultLanguage: 'en' } }
   beforeEach(async () => {
     const DBConnectionMock = new SequelizeMock()
     /**
@@ -30,6 +32,11 @@ describe('mixFestival', () => {
       timestamps: false,
       hasPrimaryKeys: false
     })
+    TermTaxonomyMock = DBConnectionMock.define('term_taxonomy', {}, {
+      autoQueryFallback: false,
+      timestamps: false,
+      hasPrimaryKeys: false
+    })
     /**
      * https://github.com/BlinkUX/sequelize-mock/issues/43
      * https://sequelize-mock.readthedocs.io/en/latest/docs/mock-queries/
@@ -42,6 +49,7 @@ describe('mixFestival', () => {
      */
     applyHandlers(PostmetaMock, samplePostmetaData)
     applyHandlers(PostMock, samplePostData)
+    applyHandlers(TermTaxonomyMock, sampleTermTaxonomyData)
     // PostMock.$queueResult(samplePostData.data.map(s => PostMock.build(s)))
     // PostmetaMock.$queueResult(samplePostmetaData.data.map(s => PostmetaMock.build(s)))
   })
@@ -53,16 +61,26 @@ describe('mixFestival', () => {
   })
 
   // Questionable functionality
-  it.only('retrieves image custom fields from `en` post', async () => {
-    // postId 493 for `da` LandingPage
-    const image = await getLandingPageInformationMixProgramImage(PostMock, PostmetaMock)({ postId: 493 })
+  it.only('getPosts retrieves image custom fields from `en` post', async () => {
+    // There is only one Danish landing page
+    const danishLandingPage = (await getPosts(PostMock, null, null, TermTaxonomyMock, i18nEnabledSettings)({ postType: 'wp_landing_page', language: 'da' }))[0]
+    const image = await getLandingPageInformationMixProgramImage(PostMock, PostmetaMock, i18nEnabledSettings)({
+      postId: danishLandingPage.ID,
+      additionalFields: danishLandingPage.additionalFields
+    })
     expect(image).toEqual('http://mix.backend.test/wp-content/uploads/2018/06/MIX18_program_240x170_opslag_lowres_PRINT-1.jpg')
   })
 
-  it('retrieves file custom fields from `en` post', async () => {
+  it('getPosts retrieves file custom fields from `en` post', async () => {
     // postId 493 for `da` LandingPage
     const file = await getLandingPageInformationMixProgramDownload(PostMock, PostmetaMock)({ postId: 493 })
     expect(file).toEqual('http://mix.backend.test/wp-content/uploads/2018/06/MIX18_program_240x170_opslag_lowres_PRINT-1.pdf')
+  })
+
+  it('getPost retrieves image custom fields from `en` post', async () => {
+    // postId 493 for `da` LandingPage
+    const image = await getLandingPageInformationMixProgramImage(PostMock, PostmetaMock)({ postId: 493 })
+    expect(image).toEqual('http://mix.backend.test/wp-content/uploads/2018/06/MIX18_program_240x170_opslag_lowres_PRINT-1.jpg')
   })
 
   it('retrieves image repeater custom fields from `en` post', async () => {

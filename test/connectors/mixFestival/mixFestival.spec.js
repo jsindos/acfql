@@ -4,6 +4,7 @@ const SequelizeMock = require('sequelize-mock')
 const applyHandlers = require('../../utilities').applyHandlers
 
 const getFeaturedImage = require('./graphql/modules/Post/connectors/getFeaturedImage')
+// require('./graphql/modules/Post/connectors/getPosts')
 const getLandingPageInformationMixProgramImage = require('./graphql/modules/CustomFields/connectors/getLandingPageInformationMixProgramImage')
 const getLandingPageInformationMixProgramDownload = require('./graphql/modules/CustomFields/connectors/getLandingPageInformationMixProgramDownload')
 const getAboutPageImagesImages = require('./graphql/modules/CustomFields/connectors/getAboutPageImagesImages')
@@ -52,20 +53,20 @@ describe('mixFestival', () => {
   })
 
   // Questionable functionality
-  it('retrieves image custom fields from `en` post', async () => {
-    // postId 493 for `da` landing page
+  it.only('retrieves image custom fields from `en` post', async () => {
+    // postId 493 for `da` LandingPage
     const image = await getLandingPageInformationMixProgramImage(PostMock, PostmetaMock)({ postId: 493 })
     expect(image).toEqual('http://mix.backend.test/wp-content/uploads/2018/06/MIX18_program_240x170_opslag_lowres_PRINT-1.jpg')
   })
 
   it('retrieves file custom fields from `en` post', async () => {
-    // postId 493 for `da` landing page
+    // postId 493 for `da` LandingPage
     const file = await getLandingPageInformationMixProgramDownload(PostMock, PostmetaMock)({ postId: 493 })
     expect(file).toEqual('http://mix.backend.test/wp-content/uploads/2018/06/MIX18_program_240x170_opslag_lowres_PRINT-1.pdf')
   })
 
   it('retrieves image repeater custom fields from `en` post', async () => {
-    // postId 490 for `da` about page with repeater images on `en` translation page
+    // postId 490 for `da` AboutPage with repeater images on `en` translation page
     const images = await getAboutPageImagesImages(PostMock, PostmetaMock)({ postId: 490 })
     expect(images).toHaveLength(5)
     expect(images).toContainEqual(
@@ -85,4 +86,3 @@ describe('mixFestival', () => {
     )
   })
 })
-

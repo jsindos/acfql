@@ -12,7 +12,7 @@ const sampleTermTaxonomyData = require('./testData/TermTaxonomy')
 
 describe('internationalisation', () => {
   let PostMock, PostmetaMock, TermTaxonomyMock
-  const i18nEnabledSettings = { privateSettings: { languageEnabled: true } }
+  const i18nEnabledSettings = { privateSettings: { languageEnabled: true, defaultLanguage: 'en' } }
   beforeEach(async () => {
     const DBConnectionMock = new SequelizeMock()
     /**

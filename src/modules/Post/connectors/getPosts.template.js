@@ -65,7 +65,7 @@ module.exports = function (Post, Terms, TermRelationships, TermTaxonomy, setting
               return TermTaxonomy.findOne({
                 where: {
                   description: {
-                    [Op.like]: \`%"$\{language || 'en'}";i:$\{post.ID}%\`
+                    [Op.like]: \`%"$\{language || settings.privateSettings.defaultLanguage}";i:$\{post.ID}%\`
                   },
                   taxonomy: 'post_translations'
                 }

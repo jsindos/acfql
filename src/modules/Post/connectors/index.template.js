@@ -11,7 +11,7 @@ const getFeaturedImage = require('./getFeaturedImage')
 
 module.exports = function ({ Post, Postmeta, Terms, TermRelationships, TermTaxonomy }, settings) {
   return {
-    getPost: getPost(Post),
+    getPost: getPost(Post, TermTaxonomy, settings),
     getPosts: getPosts(Post, Terms, TermRelationships, TermTaxonomy, settings),
     getCustomFields: getCustomFields(Post, Postmeta),
     getFeaturedImage: getFeaturedImage(Post, Postmeta)

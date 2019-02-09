@@ -9,7 +9,7 @@ const getPost = require('./graphql/modules/Post/connectors/getPost')
 const samplePostmetaData = require('./testData/Postmeta')
 const samplePostData = require('./testData/Post')
 
-describe('internationalisation', () => {
+describe('additional fields', () => {
   let PostMock, PostmetaMock
   beforeEach(async () => {
     const DBConnectionMock = new SequelizeMock()
@@ -49,7 +49,7 @@ describe('internationalisation', () => {
   })
 
   it('retrieves post type', async () => {
-    const post = await getPost(PostMock, PostmetaMock)({ postId: 69 })
+    const post = await getPost(PostMock, PostmetaMock)({ id: 69 })
     expect(post.postType).toEqual('post')
   })
 })

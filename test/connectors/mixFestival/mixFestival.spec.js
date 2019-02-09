@@ -4,6 +4,7 @@ const SequelizeMock = require('sequelize-mock')
 const applyHandlers = require('../../utilities').applyHandlers
 
 const getFeaturedImage = require('./graphql/modules/Post/connectors/getFeaturedImage')
+const getPost = require('./graphql/modules/Post/connectors/getPost')
 const getPosts = require('./graphql/modules/Post/connectors/getPosts')
 const getLandingPageInformationMixProgramImage = require('./graphql/modules/CustomFields/connectors/getLandingPageInformationMixProgramImage')
 const getLandingPageInformationMixProgramDownload = require('./graphql/modules/CustomFields/connectors/getLandingPageInformationMixProgramDownload')
@@ -60,10 +61,12 @@ describe('mixFestival', () => {
     expect(screeningFeaturedImage.src).toEqual('http://mix.backend.test/wp-content/uploads/2018/09/MV5BZmU2MjllMWYtZDA3MS00YjJjLWE3MDQtM2RlMzViZGUyMzhkXkEyXkFqcGdeQXVyMjQ3NzUxOTM@._V1_.jpg')
   })
 
-  // Questionable functionality
-  it.only('getPosts and custom field resolvers retrieves image custom fields from default language post', async () => {
+  it('getPosts and custom field resolvers retrieves image custom fields from default language post', async () => {
     // There is only one Danish landing page
-    const danishLandingPage = (await getPosts(PostMock, null, null, TermTaxonomyMock, i18nEnabledSettings)({ postType: 'wp_landing_page', language: 'da' }))[0]
+    const danishLandingPage = (await getPosts(PostMock, null, null, TermTaxonomyMock, i18nEnabledSettings)({
+      postType: 'wp_landing_page',
+      language: 'da'
+    }))[0]
     const image = await getLandingPageInformationMixProgramImage(PostMock, PostmetaMock, i18nEnabledSettings)({
       postId: danishLandingPage.ID,
       additionalFields: danishLandingPage.additionalFields
@@ -72,14 +75,27 @@ describe('mixFestival', () => {
   })
 
   it('getPosts retrieves file custom fields from `en` post', async () => {
-    // postId 493 for `da` LandingPage
-    const file = await getLandingPageInformationMixProgramDownload(PostMock, PostmetaMock)({ postId: 493 })
+    // There is only one Danish landing page
+    const danishLandingPage = (await getPosts(PostMock, null, null, TermTaxonomyMock, i18nEnabledSettings)({
+      postType: 'wp_landing_page',
+      language: 'da'
+    }))[0]
+    const file = await getLandingPageInformationMixProgramDownload(PostMock, PostmetaMock, i18nEnabledSettings)({
+      postId: danishLandingPage.ID,
+      additionalFields: danishLandingPage.additionalFields
+    })
     expect(file).toEqual('http://mix.backend.test/wp-content/uploads/2018/06/MIX18_program_240x170_opslag_lowres_PRINT-1.pdf')
   })
 
-  it('getPost retrieves image custom fields from `en` post', async () => {
+  it.only('getPost retrieves image custom fields from `en` post', async () => {
     // postId 493 for `da` LandingPage
-    const image = await getLandingPageInformationMixProgramImage(PostMock, PostmetaMock)({ postId: 493 })
+    const danishLandingPage = (await getPost(PostMock, TermTaxonomyMock, i18nEnabledSettings)({
+      id: 493
+    }))
+    const image = await getLandingPageInformationMixProgramImage(PostMock, PostmetaMock, i18nEnabledSettings)({
+      postId: danishLandingPage.ID,
+      additionalFields: danishLandingPage.additionalFields
+    })
     expect(image).toEqual('http://mix.backend.test/wp-content/uploads/2018/06/MIX18_program_240x170_opslag_lowres_PRINT-1.jpg')
   })
 

@@ -22,6 +22,7 @@ module.exports = function (Post, TermTaxonomy, settings) {
       const post = await Post.findOne({
         where: where,
       })
+      if (!post) return null
       const termTaxonomy = await TermTaxonomy.findOne({
         where: {
           description: {
@@ -63,7 +64,7 @@ module.exports = function (Post, TermTaxonomy, settings) {
 
     return Post.findOne({
       where: where,
-    }).then(post => camelizeObjectKeys(post))
+    }).then(post => post && camelizeObjectKeys(post))
   }
 }
 `

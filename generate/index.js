@@ -8,7 +8,7 @@ require.context = require('./requireContextPolyfill')
 
 const exec = util.promisify(require('child_process').exec)
 
-const main = async (buildDirectory = './graphql', acfExportsDirectory = './acf-exports') => {
+const main = async (buildDirectory = './graphql', acfExportsDirectory = './acf-exports', single = true) => {
   try {
     const { stdout, stderr } = await exec(`npx rimraf ${buildDirectory}`)
     stdout && console.log(stdout)
@@ -60,6 +60,7 @@ const main = async (buildDirectory = './graphql', acfExportsDirectory = './acf-e
   }))
 
   console.log(`Your graphql schema has been generated in "${buildDirectory}".`)
+  single && process.exit()
 }
 
 module.exports = main

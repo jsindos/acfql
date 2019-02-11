@@ -3,3 +3,4 @@ graphql/
 /acf-exports/
 settings.js
 .DS_Store
+test/connectors/instarestoration/

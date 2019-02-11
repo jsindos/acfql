@@ -87,7 +87,7 @@ describe('mixFestival', () => {
     expect(file).toEqual('http://mix.backend.test/wp-content/uploads/2018/06/MIX18_program_240x170_opslag_lowres_PRINT-1.pdf')
   })
 
-  it.only('getPost retrieves image custom fields from `en` post', async () => {
+  it('getPost retrieves image custom fields from `en` post', async () => {
     // postId 493 for `da` LandingPage
     const danishLandingPage = (await getPost(PostMock, TermTaxonomyMock, i18nEnabledSettings)({
       id: 493
@@ -99,7 +99,7 @@ describe('mixFestival', () => {
     expect(image).toEqual('http://mix.backend.test/wp-content/uploads/2018/06/MIX18_program_240x170_opslag_lowres_PRINT-1.jpg')
   })
 
-  it('retrieves image repeater custom fields from `en` post', async () => {
+  it.skip('retrieves image repeater custom fields from `en` post', async () => {
     // postId 490 for `da` AboutPage with repeater images on `en` translation page
     const images = await getAboutPageImagesImages(PostMock, PostmetaMock)({ postId: 490 })
     expect(images).toHaveLength(5)

@@ -71,7 +71,7 @@ describe('mixFestival', () => {
       postId: danishLandingPage.ID,
       additionalFields: danishLandingPage.additionalFields
     })
-    expect(image).toEqual('http://mix.backend.test/wp-content/uploads/2018/06/MIX18_program_240x170_opslag_lowres_PRINT-1.jpg')
+    expect(image.src).toEqual('http://mix.backend.test/wp-content/uploads/2018/06/MIX18_program_240x170_opslag_lowres_PRINT-1.jpg')
   })
 
   it('getPosts retrieves file custom fields from `en` post', async () => {
@@ -84,7 +84,7 @@ describe('mixFestival', () => {
       postId: danishLandingPage.ID,
       additionalFields: danishLandingPage.additionalFields
     })
-    expect(file).toEqual('http://mix.backend.test/wp-content/uploads/2018/06/MIX18_program_240x170_opslag_lowres_PRINT-1.pdf')
+    expect(file.src).toEqual('http://mix.backend.test/wp-content/uploads/2018/06/MIX18_program_240x170_opslag_lowres_PRINT-1.pdf')
   })
 
   it('getPost retrieves image custom fields from `en` post', async () => {
@@ -96,7 +96,7 @@ describe('mixFestival', () => {
       postId: danishLandingPage.ID,
       additionalFields: danishLandingPage.additionalFields
     })
-    expect(image).toEqual('http://mix.backend.test/wp-content/uploads/2018/06/MIX18_program_240x170_opslag_lowres_PRINT-1.jpg')
+    expect(image.src).toEqual('http://mix.backend.test/wp-content/uploads/2018/06/MIX18_program_240x170_opslag_lowres_PRINT-1.jpg')
   })
 
   it.skip('retrieves image repeater custom fields from `en` post', async () => {

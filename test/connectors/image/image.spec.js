@@ -5,9 +5,11 @@ const { toMatchOneOf, toMatchShapeOf } = require('jest-to-match-shape-of')
 const applyHandlers = require('../../utilities').applyHandlers
 
 const getCustomFields = require('./graphql/modules/Post/connectors/getCustomFields')
+const getOrangeInformationPhoto = require('./graphql/modules/CustomFields/connectors/getOrangeInformationPhoto')
+const getOrangeInformationPhotos = require('./graphql/modules/CustomFields/connectors/getOrangeInformationPhotos')
 
-const samplePostmetaData = require('./testData/Postmeta')
-const samplePostData = require('./testData/Post')
+const samplePostmetaData = require('./testData#11-02-2019/Postmeta')
+const samplePostData = require('./testData#11-02-2019/Post')
 
 expect.extend({
   toMatchOneOf,
@@ -48,56 +50,47 @@ describe('nestedFieldGroups', () => {
     // PostmetaMock.$queueResult(samplePostmetaData.data.map(s => PostmetaMock.build(s)))
   })
 
-  it('retrieves fields for post and page custom fields nested under the field group name', async () => {
-    const customFields = await getCustomFields(PostMock, PostmetaMock)({ postId: 40 })
-    // Retrieves fields that have the same name under different field groups
-    expect(customFields).toMatchShapeOf({
-      appleInformation: {
-        location: ''
-      },
-      orangeInformation: {
-        location: ''
-      }
-    })
-    expect(customFields.appleInformation.location).toEqual('Apple')
-    expect(customFields.orangeInformation.location).toEqual('Orange')
-  })
-
-  it('retrieves repeater fields that have the same name under different field groups', async () => {
-    const customFields = await getCustomFields(PostMock, PostmetaMock)({ postId: 40 })
-    // console.log(JSON.stringify(customFields))
-    expect(customFields).toMatchShapeOf({
-      appleInformation: {
-        photos: [
-          {
-            photo: ''
-          }
-        ]
-      }
-    })
-    expect(customFields.appleInformation.photos).toContainEqual(expect.objectContaining({ photo: 'apple_photo_one' }))
-  })
-
-  it('repeater field image', async () => {
-    const customFields = await getCustomFields(PostMock, PostmetaMock)({ postId: 40 })
-    // console.log(JSON.stringify(customFields))
+  it('image custom fields sourced from a page or post are nested under `src`', async () => {
+    const customFields = await getCustomFields(PostMock, PostmetaMock)({ postId: 24 })
     expect(customFields).toMatchShapeOf({
       orangeInformation: {
+        photo: {
+          src: ''
+        },
         photos: [
           {
             photo: {
-              src: ''
-            },
-            otherPhoto: {
               src: ''
             }
           }
         ]
       }
     })
-    expect(customFields.orangeInformation.photos).toContainEqual(expect.objectContaining({
-      photo: { src: 'http://testpress.localhost/wp-content/uploads/2018/10/Emma-Watson-Wallpapers-sayou-30461666-1600-1200-1.jpg' },
-      otherPhoto: { src: 'http://testpress.localhost/wp-content/uploads/2018/10/IMG_0376.jpg' }
-    }))
+    expect(customFields.orangeInformation.photo).objectContaining(
+      { src: 'http://testpress.test/wp-content/uploads/2019/02/IMG_0375.jpg' }
+    )
+    expect(customFields.orangeInformation.photos).toContainEqual(
+      expect.objectContaining({ photo: { src: 'http://testpress.test/wp-content/uploads/2019/02/IMG_0267.jpg' } })
+    )
+  })
+
+  it('image field nested under `src`', async () => {
+    const photo = await getOrangeInformationPhoto(PostMock, PostmetaMock)({ postId: 29 })
+    expect(photo).toMatchShapeOf({
+      src: ''
+    })
+    expect(photo.src).toContainEqual('http://testpress.test/wp-content/uploads/2019/02/IMG_0375.jpg')
+  })
+
+  it.only('image repeater field nested under `src`', async () => {
+    const photos = await getOrangeInformationPhotos(PostMock, PostmetaMock)({ postId: 29 })
+    expect(photos).toMatchShapeOf({
+      photo: {
+        src: ''
+      }
+    })
+    expect(photos).toContainEqual(
+      expect.objectContaining({ photo: { src: 'http://testpress.test/wp-content/uploads/2019/02/IMG_0267.jpg' } })
+    )
   })
 })

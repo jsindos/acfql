@@ -21,7 +21,9 @@ module.exports = (Post, Postmeta, settings) => {
           ID: Number(postMeta.meta_value)
         }
       }).then(post => {
-        return post && post.guid
+        return post && {
+          src: post.guid
+        }
       })
     })
   }

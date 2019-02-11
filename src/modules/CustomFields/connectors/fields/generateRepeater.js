@@ -56,7 +56,9 @@ module.exports = (Post, Postmeta) => {
             return resolvedRepeaterArrayWithImages.concat([
               {
                 ...repeaterEntry,
-                ${s.subFieldLabel}: image.guid
+                ${s.subFieldLabel}: {
+                  src: image.guid
+                }
               }
             ])
           } else {

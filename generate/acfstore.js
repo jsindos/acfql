@@ -147,7 +147,7 @@ class ACFStore {
         })
       })
       this.addFieldGroup(fieldGroup.title)
-      fieldGroup.fields.forEach(field => {
+      fieldGroup.fields && fieldGroup.fields.forEach(field => {
         this.addField(field.name, field.label, fieldGroup.title, field.type)
         if (field.type === 'repeater') {
           field.sub_fields.forEach(subField => {

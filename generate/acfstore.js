@@ -147,7 +147,11 @@ class ACFStore {
         })
       })
       this.addFieldGroup(fieldGroup.title)
-      fieldGroup.fields && fieldGroup.fields.forEach(field => {
+      if (!fieldGroup.fields) {
+        console.log(`"${fieldGroup.title}" has no fields. Please include fields on all field groups.`)
+        process.exit()
+      }
+      fieldGroup.fields.forEach(field => {
         this.addField(field.name, field.label, fieldGroup.title, field.type)
         if (field.type === 'repeater') {
           field.sub_fields.forEach(subField => {

@@ -30,7 +30,7 @@ module.exports = (Post, Postmeta) => {
               ).subFieldLabel,
               value: postMetas.find(ppm => ppm.meta_key === pm.meta_key.substring(1))
                 && postMetas.find(ppm => ppm.meta_key === pm.meta_key.substring(1)).meta_value,
-              index: pm.meta_key.match(/^_${field.fieldName}_(\\d{1})/) && Number(pm.meta_key.match(/^_${field.fieldName}_(\\d{1})/)[1])
+              index: pm.meta_key.match(/^_${field.fieldName}_(\\d{1,2})/) && Number(pm.meta_key.match(/^_${field.fieldName}_(\\d{1,2})/)[1])
             }))
             // Filter those that didn't have an index appearing in the name of the meta_key
             .filter(pm => Number.isInteger(pm.index))
